@@ -17,19 +17,19 @@
         android:padding="8dp"
         android:contentDescription="@string/close_button"/>
 
-    <!-- Entrar como usuário -->
+    <!-- Título: Registro de usuário -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar como usuário:"
+        android:text="Registro de usuário:"
         android:textColor="#2D492D"
         android:textSize="24sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="40dp"/>
 
-    <!-- Campo Nome de usuário -->
+    <!-- Campo de Nome de usuário -->
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
@@ -44,32 +44,14 @@
         android:padding="12dp"
         android:textSize="18sp"/>
 
-
-    <!-- Campo E-mail -->
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_below="@id/etUsername"
-        android:layout_marginTop="20dp"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress"
-        android:textColorHint="#2D492D"
-        android:textColor="#2D492D"
-        android:background="@drawable/rounded_edittext"
-        android:padding="12dp"
-        android:textSize="18sp"/>
-
-    <!-- Campo Senha -->
+    <!-- Campo de Senha -->
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_below="@id/etEmail"
+        android:layout_below="@id/etUsername"
         android:layout_marginTop="20dp"
         android:hint="Senha"
         android:inputType="textPassword"
@@ -79,31 +61,53 @@
         android:padding="12dp"
         android:textSize="18sp"/>
 
-    <!--Esqueceu a senha? -->
-    <TextView
-        android:id="@+id/tvForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        android:textColor="#2D492D"
-        android:textSize="16sp"
-        android:layout_below="@id/etPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
-
-    <!-- Botão Entrar -->
-    <Button
-        android:id="@+id/btnLogin"
+    <!-- Campo de Repetir Senha -->
+    <EditText
+        android:id="@+id/etConfirmPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Entrar"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@id/etPassword"
+        android:layout_marginTop="20dp"
+        android:hint="Repetir senha"
+        android:inputType="textPassword"
+        android:textColorHint="#2D492D"
+        android:textColor="#2D492D"
+        android:background="@drawable/rounded_edittext"
+        android:padding="12dp"
+        android:textSize="18sp"/>
+
+    <!-- Campo de E-mail -->
+
+    <!-- Botão Cadastrar-se -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etConfirmPass"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:textColor="#2D492D"
+        android:textColorHint="#2D492D"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar-se"
         android:textColor="#FFFFFF"
         android:background="@drawable/rounded_button"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_below="@id/tvForgotPassword"
+        android:layout_below="@id/etEmail"
         android:layout_marginTop="40dp"
         android:padding="12dp"
         android:textSize="18sp"/>
-
 </RelativeLayout>
