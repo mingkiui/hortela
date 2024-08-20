@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">TCCHortela</string>
 <string name="close_button">Botão sair</string>
+    <string name="title">Doações</string>
+    <string name="pix_key_label">Chave Pix:</string>
+    <string name="email_label">Ou também para:</string>
+    <string name="phone_label">ou</string>
+    <string name="contact">Dúvidas? Fale conosco!</string>
+    <string name="pix_key"></string>
+    <string name="emailpix">HortelaDoacoes@gmail.com</string>
+    <string name="phone">(11)91234-5678</string>
+    <string name="email">E-mail</string>
+    <string name="subject">Assunto</string>
+    <string name="forgot_password">Esqueceu a senha?</string>
+    <string name="button_send">Enviar</string>
 </resources>
