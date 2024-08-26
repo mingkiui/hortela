@@ -19,7 +19,7 @@
 
     <!-- Título: Registro de usuário -->
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/tvTitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registro de usuário:"
@@ -31,12 +31,12 @@
 
     <!-- Campo de Nome de usuário -->
     <EditText
-        android:id="@+id/etUsername"
+        android:id="@+id/etUsername1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_below="@id/tvTitle"
+        android:layout_below="@id/tvTitle1"
         android:hint="Nome de usuário"
         android:textColorHint="#2D492D"
         android:textColor="#2D492D"
@@ -46,12 +46,12 @@
 
     <!-- Campo de Senha -->
     <EditText
-        android:id="@+id/etPassword"
+        android:id="@+id/etPassword1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_below="@id/etUsername"
+        android:layout_below="@id/etUsername1"
         android:layout_marginTop="20dp"
         android:hint="Senha"
         android:inputType="textPassword"
@@ -63,12 +63,12 @@
 
     <!-- Campo de Repetir Senha -->
     <EditText
-        android:id="@+id/etConfirmPass"
+        android:id="@+id/etConfirmPass1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_below="@id/etPassword"
+        android:layout_below="@id/etPassword1"
         android:layout_marginTop="20dp"
         android:hint="Repetir senha"
         android:inputType="textPassword"
@@ -82,10 +82,10 @@
 
     <!-- Botão Cadastrar-se -->
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etEmail1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etConfirmPass"
+        android:layout_below="@id/etConfirmPass1"
         android:layout_marginStart="30dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="30dp"
@@ -106,7 +106,7 @@
         android:background="@drawable/rounded_button"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_below="@id/etEmail"
+        android:layout_below="@id/etEmail1"
         android:layout_marginTop="40dp"
         android:padding="12dp"
         android:textSize="18sp"/>

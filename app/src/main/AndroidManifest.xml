@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icoi"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icoi"
         android:supportsRtl="true"
         android:theme="@style/Theme.TCCHortela"
         tools:targetApi="31">
@@ -21,6 +21,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+      <activity android:name=".Cadastro"> </activity>
+        <activity android:name=".DoacaoPix"></activity>
+        <activity android:name=".DoacaoCartao"></activity>
+        <activity android:name=".FaleConosco"></activity>
+        <activity android:name=".InformacoesP"></activity>
+        <activity android:name=".InscricaoBen"></activity>
+        <activity android:name=".InscricaoVol"></activity>
+        <activity android:name=".Perfil"></activity>
+        <activity android:name=".RealizarDoacao"></activity>
+        <activity android:name=".RedefinirSenha"></activity>
+        <activity android:name=".RedefinirSenhaCodigo"></activity>
+        <activity android:name=".TelaPrincipal"></activity>
+
+
+
     </application>
 
 </manifest>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TCCHortela</string>
+    <string name="app_name">Hortela</string>
 <string name="close_button">Botão sair</string>
     <string name="title">Doações</string>
     <string name="pix_key_label">Chave Pix:</string>

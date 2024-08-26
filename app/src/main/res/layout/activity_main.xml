@@ -6,16 +6,16 @@
     android:background="#E9E6D5">
 
     <!-- Botão de fechar (X) no canto superior esquerdo -->
-    <ImageButton
-        android:id="@+id/btnClose"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_close"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:padding="8dp"
-        android:contentDescription="@string/close_button"/>
+
+    <ImageView
+        android:id="@+id/icon_principal"
+        android:layout_width="370dp"
+        android:layout_height="170dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/iconhortela" />
+
 
     <!-- Entrar como usuário -->
     <TextView
@@ -26,8 +26,9 @@
         android:textColor="#2D492D"
         android:textSize="24sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="40dp"
+        android:layout_below="@id/icon_principal"/>
 
     <!-- Campo Nome de usuário -->
     <EditText
@@ -89,7 +90,7 @@
         android:textSize="16sp"
         android:layout_below="@id/etPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="10dp"/>
 
     <!-- Botão Entrar -->
     <Button
@@ -102,8 +103,21 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_below="@id/tvForgotPassword"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:padding="12dp"
         android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tvNoAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Não tenho conta"
+        android:textColor="#2D492D"
+        android:textSize="16sp" />
 
 </RelativeLayout>
