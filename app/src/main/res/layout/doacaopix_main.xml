@@ -3,111 +3,126 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#FFFFFF">
+    android:background="#E9E6D5">
 
-    <!-- Título -->
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_close"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/close_button" />
+
+    <!-- Título Doações -->
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tvDoacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title"
+        android:text="Doações:"
+        android:textColor="#006E42"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true" />
 
-    <!-- Chave Pix -->
+    <!-- Logo ou ícone -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/tvDoacoes"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/doacaopix" />
+
+    <!-- Texto Chave Pix -->
+
+    <!-- Botão de copiar chave Pix -->
+
+    <!-- QR Code -->
 
     <TextView
-        android:id="@+id/pixkeylabel"
+        android:id="@+id/tvChavePix"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
-        android:text="@string/pix_key_label"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/pixkey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pix_key"
+        android:layout_below="@id/imgLogo"
+        android:layout_marginTop="5dp"
+        android:text="Chave Pix:"
+        android:textColor="#006E42"
         android:textSize="18sp"
-        android:layout_below="@id/title"
-        android:layout_marginTop="24dp"
-        android:layout_toEndOf="@id/pixkeylabel"
-        android:layout_marginStart="8dp"/>
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnCopyPix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgQRCode"
+        android:layout_marginStart="-83dp"
+        android:layout_marginTop="22dp"
+        android:layout_toEndOf="@id/tvChavePix"
+        android:backgroundTint="#006E42"
+        android:text="Copiar"
+        android:textColor="@android:color/white" />
 
     <ImageView
-        android:id="@+id/qr_code"
-        android:layout_width="370dp"
-        android:layout_height="170dp"
-        android:layout_below="@id/pixkeylabel"
-        android:layout_marginTop="9dp"
-        android:src="@drawable/qrcode" />
+        android:id="@+id/imgQRCode"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/tvChavePix"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/qr" />
 
+    <!-- Texto Alternativo -->
     <TextView
-        android:id="@+id/email_label"
+        android:id="@+id/tvOuTambemPara"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/email_label"
-        android:textSize="18sp"
-        android:layout_below="@id/qr_code"
-        android:layout_marginTop="24dp"
-        android:layout_alignParentStart="true"/>
+        android:text="Ou também para:"
+        android:textColor="#006E42"
+        android:textSize="16sp"
+        android:layout_below="@+id/btnCopyPix"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
 
+    <!-- E-mail -->
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/emailpix"
-        android:textSize="18sp"
-        android:layout_below="@id/qr_code"
-        android:layout_marginTop="24dp"
-        android:layout_toEndOf="@id/email_label"
-        android:layout_marginStart="8dp"/>
+        android:text="HortelaDoações@gmail.com"
+        android:textColor="#006E42"
+        android:textSize="16sp"
+        android:layout_below="@id/tvOuTambemPara"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true" />
 
     <!-- Telefone -->
     <TextView
-        android:id="@+id/phone_label"
+        android:id="@+id/tvTelefone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/phone_label"
-        android:textSize="18sp"
-        android:layout_below="@id/email"
-        android:layout_marginTop="8dp"
-        android:layout_alignParentStart="true"/>
+        android:text="(11) 91234-5678"
+        android:textColor="#006E42"
+        android:textSize="16sp"
+        android:layout_below="@id/tvEmail"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true" />
 
+    <!-- Texto de Dúvidas -->
     <TextView
-        android:id="@+id/phone"
+        android:id="@+id/tvDuvidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/phone"
-        android:textSize="18sp"
-        android:layout_below="@id/email"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@id/phone_label"
-        android:layout_marginStart="8dp"/>
+        android:text="Dúvidas? Fale conosco!"
+        android:textColor="#006E42"
+        android:textSize="14sp"
+        android:layout_below="@id/tvTelefone"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
 
-    <!-- Contato -->
-    <TextView
-        android:id="@+id/contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/contact"
-        android:textSize="18sp"
-        android:layout_below="@id/phone"
-        android:layout_marginTop="24dp"
-        android:layout_centerHorizontal="true"/>
-
-    <!-- Botão de Fechar -->
-    <ImageButton
-        android:id="@+id/close_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_close"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp"/>
 </RelativeLayout>

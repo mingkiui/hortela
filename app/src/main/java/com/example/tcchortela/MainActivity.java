@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         tvNoAccount = findViewById(R.id.tvNoAccount);
 
-        // Inicialize o DatabaseHelper com a referência da Activity
+
         dbHelper = new DatabaseHelper(this);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 String password = etPassword.getText().toString().trim();
                 String email = etEmail.getText().toString().trim();
 
-                // Verificar se os campos estão preenchidos
+
                 if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(email)) {
                     Toast.makeText(MainActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {

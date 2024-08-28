@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Hortela</string>
-<string name="close_button">Botão sair</string>
+    <string name="app_name">Hortelã</string>
+<string name="close_button">Botão voltar/sair</string>
     <string name="title">Doações</string>
     <string name="pix_key_label">Chave Pix:</string>
     <string name="email_label">Ou também para:</string>

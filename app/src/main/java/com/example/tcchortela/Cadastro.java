@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
 
 public class Cadastro extends AppCompatActivity {
 
     private EditText etUsername1, etPassword1, etConfirmPass1, etEmail1;
     private Button btnRegister;
+    private ImageButton btnClose;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,7 @@ public class Cadastro extends AppCompatActivity {
         etConfirmPass1 = findViewById(R.id.etConfirmPass1);
         etEmail1 = findViewById(R.id.etEmail1);
         btnRegister = findViewById(R.id.btnRegister);
+        btnClose = findViewById(R.id.btnClose);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +45,17 @@ public class Cadastro extends AppCompatActivity {
                     // Aqui você pode adicionar a lógica para enviar os dados ao backend
                     realizarCadastro(nomeUsuario, senha, email);
                 }
+            }
+
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navegar para a Activity desejada
+                Intent intent = new Intent(Cadastro.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
