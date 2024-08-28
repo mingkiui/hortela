@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText etUsername, etEmail, etPassword;
     private Button btnLogin;
     private TextView tvForgotPassword, tvNoAccount;
+    private DatabaseHelper dbHelper; // Declare o DatabaseHelper
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         tvNoAccount = findViewById(R.id.tvNoAccount);
+
+        // Inicialize o DatabaseHelper com a referência da Activity
+        dbHelper = new DatabaseHelper(this);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,35 +44,33 @@ public class MainActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(email)) {
                     Toast.makeText(MainActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Realizar a lógica de autenticação
-                    // Aqui você pode implementar a verificação do login com seu backend ou banco de dados
-
-                    // Exemplo de lógica simples (verificação fictícia)
-                    if (username.equals("user") && password.equals("password") && email.equals("user@example.com")) {
-                        // Se o login for bem-sucedido, redirecionar para outra atividade
-                        Intent intent = new Intent(MainActivity.this, TelaPrincipal.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        // Mostrar uma mensagem de erro se o login falhar
-                        Toast.makeText(MainActivity.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
-                    }
+                    // Conectar ao banco de dados
+                    dbHelper.connectToDatabase(() -> {
+                        // Aqui você pode fazer o que precisar após a conexão, como verificar as credenciais no banco de dados
+                        // Exemplo de lógica simples (verificação fictícia)
+                        if (username.equals("user") && password.equals("password") && email.equals("user@example.com")) {
+                            Intent intent = new Intent(MainActivity.this, TelaPrincipal.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
+
         tvNoAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Redireciona para a tela de cadastro
                 Intent intent = new Intent(MainActivity.this, Cadastro.class);
                 startActivity(intent);
             }
         });
-        // Configurar o listener para o texto de "Esqueceu a senha?"
+
         tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Redirecionar para a atividade de recuperação de senha
                 Intent intent = new Intent(MainActivity.this, RedefinirSenhaCodigo.class);
                 startActivity(intent);
             }
