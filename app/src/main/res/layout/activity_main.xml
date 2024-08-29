@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E9E6D5">
@@ -22,28 +21,28 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar como usuário:"
-        android:textColor="#2D492D"
-        android:textSize="24sp"
+        android:layout_below="@id/icon_principal"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="40dp"
-        android:layout_below="@id/icon_principal"/>
+        android:text="Entrar como usuário:"
+        android:textColor="#2D492D"
+        android:textSize="24sp" />
 
     <!-- Campo Nome de usuário -->
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_below="@id/tvTitle"
-        android:hint="Nome de usuário"
-        android:textColorHint="#2D492D"
-        android:textColor="#2D492D"
         android:background="@drawable/rounded_edittext"
+        android:hint="Nome de usuário"
         android:padding="12dp"
-        android:textSize="18sp"/>
+        android:textColor="#2D492D"
+        android:textColorHint="#2D492D"
+        android:textSize="18sp" />
 
 
     <!-- Campo E-mail -->
@@ -51,61 +50,61 @@
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:layout_below="@id/etUsername"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/rounded_edittext"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
-        android:textColorHint="#2D492D"
-        android:textColor="#2D492D"
-        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
-        android:textSize="18sp"/>
+        android:textColor="#2D492D"
+        android:textColorHint="#2D492D"
+        android:textSize="18sp" />
 
     <!-- Campo Senha -->
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:layout_below="@id/etEmail"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/rounded_edittext"
         android:hint="Senha"
         android:inputType="textPassword"
-        android:textColorHint="#2D492D"
-        android:textColor="#2D492D"
-        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
-        android:textSize="18sp"/>
+        android:textColor="#2D492D"
+        android:textColorHint="#2D492D"
+        android:textSize="18sp" />
 
     <!--Esqueceu a senha? -->
     <TextView
         android:id="@+id/tvForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Esqueceu a senha?"
-        android:textColor="#2D492D"
-        android:textSize="16sp"
         android:layout_below="@id/etPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:text="Esqueceu a senha?"
+        android:textColor="#2D492D"
+        android:textSize="16sp" />
 
     <!-- Botão Entrar -->
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvForgotPassword"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="#119F24"
+        android:padding="12dp"
         android:text="Entrar"
         android:textColor="#FFFFFF"
-        android:background="@drawable/rounded_button"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_below="@id/tvForgotPassword"
-        android:layout_marginTop="20dp"
-        android:padding="12dp"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvNoAccount"

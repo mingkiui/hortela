@@ -13,7 +13,7 @@ public class DatabaseHelper {
 
     private static final String URL = "jdbc:mysql://sql10728282:3306/dbHort";
     private static final String USER = "sql10728282";
-    private static final String PASSWORD = "UjvQEttD6J";
+    private static final String PASSWORD = "sql10728282";
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private Activity context; // Adicionar uma referência à Activity
