@@ -16,10 +16,10 @@ public class DatabaseHelper {
     private static final String PASSWORD = "sql10728282";
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-    private Activity context; // Adicionar uma referência à Activity
+    private MainActivity context; // Adicionar uma referência à Activity
 
     public DatabaseHelper(Activity context) {
-        this.context = context;
+        this.context = (MainActivity) context;
     }
 
     public void connectToDatabase(Runnable onConnected) {
@@ -32,7 +32,7 @@ public class DatabaseHelper {
                 runOnUiThread(() -> onConnected.run());
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(context, "Erro ao conectar com o banco de dados", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(context, "Usuário não encontrado", Toast.LENGTH_SHORT).show());
             }
         });
     }
