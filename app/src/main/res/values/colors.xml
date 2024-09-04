@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green_olive">#4CAFAF</color>
+    <color name="your_primary_color">#FFFFFF</color> <!-- Cor primária do aplicativo -->
+    <color name="status_bar_color">#556B2F</color> <!-- Cor da barra de status -->
+    <color name="your_accent_color">#00FF00</color> <!-- Cor de destaque do aplicativo -->
 </resources>
