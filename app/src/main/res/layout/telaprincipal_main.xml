@@ -5,11 +5,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E9E6D5"
         android:padding="16dp">
 
         <!-- Topo com logo e botões -->
+
         <LinearLayout
+            android:id="@+id/navbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -96,13 +97,16 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/SobreNos"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_below="@id/navbar"
+        android:layout_marginTop="8dp"
             android:background="@android:color/white"
             android:elevation="4dp"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="30dp">
 
             <TextView
                 android:id="@+id/tvSobreNos"
@@ -117,12 +121,27 @@
                 android:id="@+id/tvDescricaoSobreNos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+                android:text="Somos a Hortelã, uma ONG com o objetivo de ajudar famílias de baixa renda,
+possiblitando o recebimento de cestas básicsa que irão potenciar a alimentação e a saúde dessas pessoas.
+"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
+
+
         </LinearLayout>
 
+
         <!-- Botões Inferiores -->
+
+
+        <ImageView
+            android:id="@+id/imageBelowSobreNos"
+            android:layout_width="500dp"
+            android:layout_height="230dp"
+            android:layout_below="@id/SobreNos"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/fundoindex" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

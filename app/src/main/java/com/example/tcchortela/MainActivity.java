@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etUsername, etEmail, etPassword;
+    private EditText etName, etEmail, etPassword;
     private Button btnLogin;
     private TextView tvForgotPassword, tvNoAccount;
     private DatabaseHelper dbHelper; // Declare o DatabaseHelper
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etUsername = findViewById(R.id.etUsername);
+        etName = findViewById(R.id.etName);
         etPassword = findViewById(R.id.etPassword);
         etEmail = findViewById(R.id.etEmail);
         btnLogin = findViewById(R.id.btnLogin);
@@ -36,27 +36,23 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = etUsername.getText().toString().trim();
+                String name = etName.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 String email = etEmail.getText().toString().trim();
 
 
-                if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(email)) {
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password) || TextUtils.isEmpty(email)) {
                     Toast.makeText(MainActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Conectar ao banco de dados
-                    dbHelper.connectToDatabase(() -> {
-                        // Aqui você pode fazer o que precisar após a conexão, como verificar as credenciais no banco de dados
-                        // Exemplo de lógica simples (verificação fictícia)
-                        if (username.equals("user") && password.equals("password") && email.equals("user@example.com")) {
-                            Intent intent = new Intent(MainActivity.this, TelaPrincipal.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+                    // Verifique as credenciais no banco de dados
+                    if (dbHelper.checkUser(name, password, email)) {
+                        Intent intent = new Intent(MainActivity.this, TelaPrincipal.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
+                    }
+                    };
             }
         });
 

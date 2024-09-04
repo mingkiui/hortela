@@ -33,7 +33,7 @@
 
     <!-- Campo Nome de usuário -->
     <EditText
-        android:id="@+id/etUsername"
+        android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitle"
@@ -52,7 +52,7 @@
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etUsername"
+        android:layout_below="@id/etName"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"

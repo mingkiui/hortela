@@ -1,6 +1,8 @@
 package com.example.tcchortela;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -32,12 +34,31 @@ public class DatabaseHelper {
                 runOnUiThread(() -> onConnected.run());
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(context, "Usuário não encontrado", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(context, "Erro ao conectar ao banco de dados", Toast.LENGTH_SHORT).show());
             }
         });
+    }
+
+    public boolean checkUser(String name, String password, String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM users WHERE nome = ? AND pass = ? AND email = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{name, password, email});
+
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            return true;  // Usuário encontrado
+        } else {
+            cursor.close();
+            return false; // Usuário não encontrado
+        }
+    }
+
+    private SQLiteDatabase getReadableDatabase() {
+        return null;
     }
 
     private void runOnUiThread(Runnable action) {
         context.runOnUiThread(action);
     }
+
 }
