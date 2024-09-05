@@ -1,6 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#E9E6D5">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Botão de fechar -->
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_close"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/close_button" />
+
+    <!-- Texto Doações -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnClose"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Doações:"
+        android:textColor="#3F522A"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Imagem Mastercard -->
+    <ImageView
+        android:id="@+id/imgCard"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/cartao"
+        />
+
+    <!-- Campo de número do cartão -->
+    <EditText
+        android:id="@+id/etCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgCard"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="Número do cartão"
+        android:inputType="number"
+        android:backgroundTint="#3F522A"
+        android:padding="10dp" />
+
+    <!-- Campo de código de segurança -->
+    <EditText
+        android:id="@+id/etCvv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCardNumber"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="Código de segurança"
+        android:inputType="numberPassword"
+        android:backgroundTint="#3F522A"
+        android:padding="10dp"
+        android:layout_weight="1" />
+
+    <!-- Campo de data de validade -->
+    <EditText
+        android:id="@+id/etExpiryDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCardNumber"
+        android:layout_toEndOf="@id/etCvv"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="Data de validade"
+        android:inputType="text"
+        android:backgroundTint="#3F522A"
+        android:padding="10dp" />
+
+    <!-- Texto Dúvidas -->
+    <TextView
+        android:id="@+id/tvHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etExpiryDate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="Dúvidas? Fale conosco!"
+        android:textColor="#3F522A"
+        android:textStyle="bold" />
+
+</RelativeLayout>

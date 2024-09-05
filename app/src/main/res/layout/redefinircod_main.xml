@@ -25,14 +25,21 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Redefinir senha:"
+            android:text="Redefinir senha"
             android:textColor="#385637"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp" />
 
-
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/tvTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/bixinho" />
         <LinearLayout
             android:id="@+id/layoutCentral"
             android:layout_width="wrap_content"
@@ -144,8 +151,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="86dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp"
             android:backgroundTint="#385637"
+            android:padding="16dp"
             android:text="Redefinir Senha"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:cornerRadius="10dp"
+            app:iconPadding="10dp" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

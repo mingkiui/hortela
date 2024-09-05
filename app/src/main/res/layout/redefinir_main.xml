@@ -2,5 +2,99 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EFEFD4"
+        android:padding="15dp">
+
+        <!-- Botão de Fechar -->
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_close"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:padding="8dp"
+            android:contentDescription="@string/close_button"/>
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Redefinir senha"
+            android:textColor="#3D5532"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp" />
+
+        <!-- Campo E-mail -->
+        <TextView
+            android:id="@+id/tvEmailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="E-mail:"
+            android:textColor="#3D5532"
+            android:textSize="18sp"
+            android:layout_below="@id/tvTitulo"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvEmailLabel"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#3D5532"
+            android:hint="Digite seu e-mail"
+            android:inputType="textEmailAddress"
+            android:padding="12dp" />
+
+        <!-- Campo Nova Senha -->
+        <TextView
+            android:id="@+id/tvNovaSenhaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nova Senha:"
+            android:textColor="#3D5532"
+            android:textSize="18sp"
+            android:layout_below="@id/etEmail"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp" />
+
+        <EditText
+            android:id="@+id/etNovaSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNovaSenhaLabel"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#3D5532"
+            android:hint="Digite sua nova senha"
+            android:inputType="textPassword"
+            android:padding="12dp" />
+
+        <!-- Botão Redefinir Senha -->
+        <Button
+            android:id="@+id/btnRedefinirSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Redefinir Senha"
+            android:textColor="#F5F3E8"
+            android:textSize="18sp"
+            android:backgroundTint="#3D5532"
+            android:fontFamily="sans-serif-medium"
+            android:layout_below="@id/etNovaSenha"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="32dp"
+            android:padding="12dp" />
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
