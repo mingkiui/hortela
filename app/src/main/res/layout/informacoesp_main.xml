@@ -5,7 +5,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F7F2E7">
+        android:background="#E9E6D5">
 
         <!-- Botão de Fechar (X) -->
         <ImageView

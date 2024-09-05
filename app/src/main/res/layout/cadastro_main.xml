@@ -24,9 +24,10 @@
         android:id="@+id/tvTitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registro de usuário:"
-        android:textColor="#2D492D"
+        android:text="Registro de usuário"
+        android:textColor="#3D5532"
         android:textSize="24sp"
+        android:fontFamily="sans-serif-medium"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="40dp"/>

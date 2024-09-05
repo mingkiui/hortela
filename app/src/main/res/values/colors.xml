@@ -6,4 +6,16 @@
     <color name="your_primary_color">#FFFFFF</color> <!-- Cor primária do aplicativo -->
     <color name="status_bar_color">#556B2F</color> <!-- Cor da barra de status -->
     <color name="your_accent_color">#00FF00</color> <!-- Cor de destaque do aplicativo -->
+    <color name="green">#0f5f31</color>
+    <color name="red">#d13030</color>
+    <color name="background">#f5f2e9</color>
+
+    <!-- Cores dos textos -->
+    <color name="textPrimary">#0f5f31</color>
+    <color name="textSecondary">#d13030</color>
+    <color name="textHint">#7d7d7d</color>
+
+    <!-- Cores do botão -->
+    <color name="buttonColor">#0f5f31</color>
+    <color name="buttonTextColor">#ffffff</color>
 </resources>

@@ -133,7 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dúvidas? Fale conosco!"
-        android:textColor="#2F5233"
+        android:textColor="#3D5532"
         android:textSize="16sp"
         tools:layout_editor_absoluteX="121dp"
         tools:layout_editor_absoluteY="400dp"

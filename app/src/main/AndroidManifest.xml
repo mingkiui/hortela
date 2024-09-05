@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,32 +13,31 @@
         android:roundIcon="@drawable/icoi"
         android:supportsRtl="true"
         android:theme="@style/Theme.TCCHortela"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-      <activity android:name=".Cadastro"> </activity>
-        <activity android:name=".DoacaoPix"></activity>
-        <activity android:name=".DoacaoCartao"></activity>
-        <activity android:name=".FaleConosco"></activity>
-        <activity android:name=".InformacoesP"></activity>
-        <activity android:name=".InscricaoBen"></activity>
-        <activity android:name=".InscricaoVol"></activity>
-        <activity android:name=".Perfil"></activity>
-        <activity android:name=".RealizarDoacao"></activity>
-        <activity android:name=".RedefinirSenha"></activity>
-        <activity android:name=".RedefinirSenhaCodigo"></activity>
-        <activity android:name=".TelaPrincipal"></activity>
-
-
-
+        <activity android:name=".Cadastro" >
+        </activity>
+        <activity android:name=".CalendarioVol" />
+        <activity android:name=".DoacaoPix" />
+        <activity android:name=".DoacaoCartao" />
+        <activity android:name=".FaleConosco" />
+        <activity android:name=".InformacoesP" />
+        <activity android:name=".InscricaoBen" />
+        <activity android:name=".InscricaoVol" />
+        <activity android:name=".Perfil" />
+        <activity android:name=".RealizarDoacao" />
+        <activity android:name=".RedefinirSenha" />
+        <activity android:name=".RedefinirSenhaCodigo" />
+        <activity android:name=".TelaPrincipal" />
     </application>
 
 </manifest>

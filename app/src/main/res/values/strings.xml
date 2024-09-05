@@ -13,4 +13,5 @@
     <string name="subject">Assunto</string>
     <string name="forgot_password">Esqueceu a senha?</string>
     <string name="button_send">Enviar</string>
+    <string name="title_activity_calendariovol_main">calendariovol_main</string>
 </resources>
