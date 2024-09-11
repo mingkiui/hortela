@@ -1,74 +1,60 @@
 package com.example.tcchortela;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Cadastro extends AppCompatActivity {
 
-    private EditText etUsername1, etPassword1, etConfirmPass1, etEmail1;
+    private EditText etName, etPassword, etConfirmPass, etEmail;
     private Button btnRegister;
-    private ImageButton btnClose;
+    private DatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cadastro_main);
+        setContentView(R.layout.cadastro_main);  // Certifique-se de que o layout esteja correto
 
-        etUsername1 = findViewById(R.id.etUsername1);
-        etPassword1 = findViewById(R.id.etPassword1);
-        etConfirmPass1 = findViewById(R.id.etConfirmPass1);
-        etEmail1 = findViewById(R.id.etEmail1);
+        etName = findViewById(R.id.etName1);
+        etPassword = findViewById(R.id.etPassword1);
+        etConfirmPass = findViewById(R.id.etConfirmPass1);
+        etEmail = findViewById(R.id.etEmail1);
         btnRegister = findViewById(R.id.btnRegister);
-        btnClose = findViewById(R.id.btnClose);
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String nomeUsuario = etUsername1.getText().toString().trim();
-                String senha = etPassword1.getText().toString().trim();
-                String repetirSenha = etConfirmPass1.getText().toString().trim();
-                String email = etEmail1.getText().toString().trim();
 
-                // Verificação básica para validar os campos
-                if (nomeUsuario.isEmpty() || senha.isEmpty() || repetirSenha.isEmpty() || email.isEmpty()) {
-                    Toast.makeText(Cadastro.this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
-                } else if (!senha.equals(repetirSenha)) {
-                    Toast.makeText(Cadastro.this, "As senhas não coincidem", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Se todos os campos estiverem válidos, podemos prosseguir com o cadastro
-                    // Aqui você pode adicionar a lógica para enviar os dados ao backend
-                    realizarCadastro(nomeUsuario, senha, email);
-                }
+        //dbHelper = new DatabaseHelper(this);
+
+        btnRegister.setOnClickListener(v -> {
+            String name = etName.getText().toString().trim();
+            String password = etPassword.getText().toString().trim();
+            String confirmPassword = etConfirmPass.getText().toString().trim();
+            String email = etEmail.getText().toString().trim();
+
+            if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password) || TextUtils.isEmpty(email)) {
+                Toast.makeText(Cadastro.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+            } else if (!password.equals(confirmPassword)) {
+                Toast.makeText(Cadastro.this, "As senhas não coincidem", Toast.LENGTH_SHORT).show();
+            } else {/*/
+                // Chamando o método de registro da DatabaseHelper
+                dbHelper.registerUser(name, password, email,
+                        () -> {
+                            // Sucesso no cadastro
+                            Toast.makeText(Cadastro.this, "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Cadastro.this, MainActivity.class);
+                            startActivity(intent);
+                            finish(); // Fecha a activity de cadastro
+                        },
+                        () -> {
+                            // Falha no cadastro
+                            Toast.makeText(Cadastro.this, "Erro ao cadastrar o usuário", Toast.LENGTH_SHORT).show();
+                        }
+                );
+                /*/
             }
-
         });
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navegar para a Activity desejada
-                Intent intent = new Intent(Cadastro.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
-    private void realizarCadastro(String nomeUsuario, String senha, String email) {
-        // Implemente aqui a lógica de comunicação com o backend para o cadastro
-
-        // Exemplo de sucesso:
-        Toast.makeText(Cadastro.this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
-
-        // Após o cadastro, você pode redirecionar para a tela de login ou tela principal
-        Intent intent = new Intent(Cadastro.this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

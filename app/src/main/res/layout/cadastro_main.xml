@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E9E6D5"
@@ -12,12 +13,13 @@
         android:id="@+id/btnClose"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_close"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/close_button"
         android:padding="8dp"
-        android:contentDescription="@string/close_button"/>
+        android:src="@drawable/ic_close"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <!-- Título: Registro de usuário -->
     <TextView
@@ -34,13 +36,13 @@
 
     <!-- Campo de Nome de usuário -->
     <EditText
-        android:id="@+id/etUsername1"
+        android:id="@+id/etName1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_below="@id/tvTitle1"
-        android:hint="Nome de usuário"
+        android:hint="Nome"
         android:textColorHint="#2D492D"
         android:textColor="#2D492D"
         android:background="@drawable/rounded_edittext"
@@ -88,7 +90,7 @@
         android:id="@+id/etEmail1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etUsername1"
+        android:layout_below="@+id/etName1"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
