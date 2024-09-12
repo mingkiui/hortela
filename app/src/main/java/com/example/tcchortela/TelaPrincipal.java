@@ -48,6 +48,7 @@ public class TelaPrincipal extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TelaPrincipal.this, SolicitarCesta.class);
                 startActivity(intent);
+                finish();
             }
         };
         icPedirCesta.setOnClickListener(pedirCestaListener);

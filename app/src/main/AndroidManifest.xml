@@ -38,6 +38,7 @@
         <activity android:name=".RedefinirSenha" />
         <activity android:name=".RedefinirSenhaCodigo" />
         <activity android:name=".TelaPrincipal" />
+        <activity android:name=".SolicitarCesta" />
     </application>
 
 </manifest>

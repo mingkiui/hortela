@@ -6,5 +6,9 @@
         <item name="colorAccent">@color/black</item>
     </style>
 
-    <style name="Theme.TCCHortela" parent="Base.Theme.TCCHortela" />
+    <style name="Theme.TCCHortela" parent="Base.Theme.TCCHortela" >
+        <item name="colorPrimary">#446F46</item>
+        <item name="colorPrimaryDark">#446F46</item> <!-- Cor da barra de status -->
+        <item name="colorAccent">@color/black</item>
+    </style>
 </resources>

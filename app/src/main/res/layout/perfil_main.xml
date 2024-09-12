@@ -9,7 +9,7 @@
         android:padding="16dp">
 
         <!-- Ícone de fechar -->
-        <ImageView
+        <ImageButton
             android:id="@+id/closeIcon"
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -31,7 +31,7 @@
 
         <!-- Nome de Usuário -->
         <TextView
-            android:id="@+id/usernameLabel"
+            android:id="@+id/nameLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/profileImage"
@@ -43,13 +43,13 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/usernameValue"
+            android:id="@+id/nameValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/usernameLabel"
+            android:layout_below="@id/nameLabel"
             android:layout_marginTop="8dp"
             android:layout_centerHorizontal="true"
-            android:text="********************"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -58,7 +58,7 @@
             android:id="@+id/emailLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/usernameValue"
+            android:layout_below="@id/nameValue"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:text="E-Mail:"
@@ -73,7 +73,7 @@
             android:layout_below="@id/emailLabel"
             android:layout_marginTop="8dp"
             android:layout_centerHorizontal="true"
-            android:text="********************"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -97,7 +97,7 @@
             android:layout_below="@id/passwordLabel"
             android:layout_marginTop="8dp"
             android:layout_centerHorizontal="true"
-            android:text="**************"
+            android:text="***"
             android:textColor="@color/black"
             android:textSize="16sp" />
         <Button
@@ -119,6 +119,18 @@
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:text="Editar Perfil"
+            android:backgroundTint="#3D5532"
+            android:textColor="@color/white" />
+
+        <!-- Botão Editar Perfil -->
+        <Button
+            android:id="@+id/editExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editProfileButton"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="Sair"
             android:backgroundTint="#3D5532"
             android:textColor="@color/white" />
 
