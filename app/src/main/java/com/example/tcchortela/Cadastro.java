@@ -11,20 +11,13 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Cadastro extends AppCompatActivity {
 
-    private EditText etName1, etEmail1, etPassword1, etConfirmPass1;
+    /*/private EditText etName1, etEmail1, etPassword1, etConfirmPass1;
     private Button btnRegister;
     private ImageButton btnClose;
     private String usuarioID;
@@ -143,5 +136,5 @@ public class Cadastro extends AppCompatActivity {
         etConfirmPass1 = findViewById(R.id.etConfirmPass1);
         btnRegister = findViewById(R.id. btnRegister);
         btnClose = findViewById(R.id.btnClose);
-    }
+    }/*/
 }

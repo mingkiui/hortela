@@ -10,16 +10,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class Perfil extends AppCompatActivity {
 
-    private TextView nameValue, emailValue, passwordValue;
+    /*/private TextView nameValue, emailValue, passwordValue;
     private Button personalInformation, editProfileButton, editExit;
     private ImageButton btnClose;
 
@@ -76,5 +70,5 @@ public class Perfil extends AppCompatActivity {
         editProfileButton = findViewById(R.id.editProfileButton);
         editExit = findViewById(R.id.editExit);
         btnClose = findViewById(R.id.btnClose); // Certifique-se de que esta linha está presente
-    }
+    }/*/
 }
