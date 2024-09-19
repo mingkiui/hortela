@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
         Handler handler = new Handler(Looper.getMainLooper());
 
         executor.execute(() -> {
-            DatabaseHelper databaseHelper = new DatabaseHelper();
-            boolean loginSucesso = databaseHelper.loginUser(email,pass);
+            boolean loginSucesso = DatabaseHelper.loginUser(email, pass);
 
             handler.post(() -> {
                 if (loginSucesso) {

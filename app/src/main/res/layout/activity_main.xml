@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E9E6D5"
     android:padding="15dp">
 
-    <!-- Botão de fechar (X) no canto superior esquerdo -->
-
-
-    <!-- Entrar como usuário -->
-
+    <!-- Ícone principal -->
     <ImageView
         android:id="@+id/icon_principal"
         android:layout_width="341dp"
@@ -20,6 +17,7 @@
         android:layout_marginEnd="26dp"
         android:src="@drawable/iconhortela" />
 
+    <!-- Título -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -33,8 +31,6 @@
         android:textSize="24sp"
         android:fontFamily="sans-serif-medium"
         />
-
-
 
     <!-- Campo E-mail -->
     <EditText
@@ -51,7 +47,8 @@
         android:padding="12dp"
         android:textColor="#2D492D"
         android:textColorHint="#2D492D"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:ignore="VisualLintTextFieldSize" />
 
     <!-- Campo Senha -->
     <EditText
@@ -68,9 +65,10 @@
         android:padding="12dp"
         android:textColor="#2D492D"
         android:textColorHint="#2D492D"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:ignore="VisualLintTextFieldSize" />
 
-    <!--Esqueceu a senha? -->
+    <!-- Esqueceu a senha? -->
     <TextView
         android:id="@+id/tvForgotPassword"
         android:layout_width="wrap_content"
@@ -83,7 +81,6 @@
         android:textSize="16sp" />
 
     <!-- Botão Entrar -->
-
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
@@ -98,8 +95,10 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:cornerRadius="10dp"
-        app:iconPadding="10dp" />
+        app:iconPadding="10dp"
+        tools:ignore="VisualLintButtonSize" />
 
+    <!-- TextView para caso não tenha conta -->
     <TextView
         android:id="@+id/tvNoAccount"
         android:layout_width="wrap_content"

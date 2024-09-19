@@ -9,10 +9,9 @@ import android.util.Log;
 
 public class DatabaseHelper {
 
-    // Informações do banco de dados
-    private static final String DB_URL = "jdbc:sqlserver://db8071.public.databaseasp.net:1433;databaseName=db8071;encrypt=true;trustServerCertificate=true;";
-    private static final String USER = "db8071";
-    private static final String PASS = "20anehort";
+    private static final String DB_URL = "jdbc:jtds:sqlserver://172.19.1.105/dbHort";
+    private static final String USER = "sa";
+    private static final String PASS = "@ITB123456";
 
     // Conectar ao banco de dados SQL Server
     public static Connection connect() {
@@ -23,7 +22,7 @@ public class DatabaseHelper {
             StrictMode.setThreadPolicy(policy);
 
             // Carregar o driver SQL Server
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             Log.d("DatabaseHelper", "Conexão bem-sucedida");
@@ -42,7 +41,7 @@ public class DatabaseHelper {
         }
 
         try {
-            String query = "INSERT INTO users (nome, email, pass, acess) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO users (nome, email, pass, access) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, nome);
             stmt.setString(2, email);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,113 +8,122 @@
     android:background="#E9E6D5"
     android:padding="15dp">
 
-    <!-- Botão de fechar (X) no canto superior esquerdo -->
-    <ImageButton
-        android:id="@+id/btnClose"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/close_button"
-        android:padding="8dp"
-        android:src="@drawable/ic_close"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <!-- Título: Registro de usuário -->
-    <TextView
-        android:id="@+id/tvTitle1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registro de usuário"
-        android:textColor="#3D5532"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif-medium"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="40dp"/>
-
-    <!-- Campo de Nome de usuário -->
-    <EditText
-        android:id="@+id/etName1"
+    <!-- RelativeLayout para os componentes internos -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_below="@id/tvTitle1"
-        android:hint="Nome"
-        android:textColorHint="#2D492D"
-        android:textColor="#2D492D"
-        android:background="@drawable/rounded_edittext"
-        android:padding="12dp"
-        android:textSize="18sp"/>
+        android:layout_height="match_parent">
 
-    <!-- Campo de Senha -->
-    <EditText
-        android:id="@+id/etPassword1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_below="@+id/etEmail1"
-        android:layout_marginTop="20dp"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        android:textColorHint="#2D492D"
-        android:textColor="#2D492D"
-        android:background="@drawable/rounded_edittext"
-        android:padding="12dp"
-        android:textSize="18sp"/>
+        <!-- Botão de fechar (X) no canto superior esquerdo -->
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/close_button"
+            android:padding="8dp"
+            android:src="@drawable/ic_close"
+            tools:ignore="TouchTargetSizeCheck" />
 
-    <!-- Campo de Repetir Senha -->
-    <EditText
-        android:id="@+id/etConfirmPass1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_below="@id/etPassword1"
-        android:layout_marginTop="20dp"
-        android:hint="Repetir senha"
-        android:inputType="textPassword"
-        android:textColorHint="#2D492D"
-        android:textColor="#2D492D"
-        android:background="@drawable/rounded_edittext"
-        android:padding="12dp"
-        android:textSize="18sp"/>
+        <!-- Título: Registro de usuário -->
+        <TextView
+            android:id="@+id/tvTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registro de usuário"
+            android:textColor="#3D5532"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="40dp"/>
 
-    <!-- Campo de E-mail -->
+        <!-- Campo de Nome de usuário -->
+        <EditText
+            android:id="@+id/etName1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_below="@id/tvTitle1"
+            android:hint="Nome"
+            android:textColorHint="#2D492D"
+            android:textColor="#2D492D"
+            android:background="@drawable/rounded_edittext"
+            android:padding="12dp"
+            android:textSize="18sp"/>
 
-    <!-- Botão Cadastrar-se -->
-    <EditText
-        android:id="@+id/etEmail1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etName1"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress"
-        android:padding="12dp"
-        android:textColor="#2D492D"
-        android:textColorHint="#2D492D"
-        android:textSize="18sp" />
+        <!-- Campo de E-mail -->
+        <EditText
+            android:id="@+id/etEmail1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etName1"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="E-mail"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:textColor="#2D492D"
+            android:textColorHint="#2D492D"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etConfirmPass1"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="#305932"
-        android:padding="12dp"
-        android:text="Cadastrar-se"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:cornerRadius="10dp"
-        app:iconPadding="10dp" />
-</RelativeLayout>
+        <!-- Campo de Senha -->
+        <EditText
+            android:id="@+id/etPassword1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_below="@+id/etEmail1"
+            android:layout_marginTop="20dp"
+            android:hint="Senha"
+            android:inputType="textPassword"
+            android:textColorHint="#2D492D"
+            android:textColor="#2D492D"
+            android:background="@drawable/rounded_edittext"
+            android:padding="12dp"
+            android:textSize="18sp"/>
+
+        <!-- Campo de Repetir Senha -->
+        <EditText
+            android:id="@+id/etConfirmPass1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_below="@id/etPassword1"
+            android:layout_marginTop="20dp"
+            android:hint="Repetir senha"
+            android:inputType="textPassword"
+            android:textColorHint="#2D492D"
+            android:textColor="#2D492D"
+            android:background="@drawable/rounded_edittext"
+            android:padding="12dp"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
+
+        <!-- Botão Cadastrar-se -->
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etConfirmPass1"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="#305932"
+            android:padding="12dp"
+            android:text="Cadastrar-se"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:cornerRadius="10dp"
+            app:iconPadding="10dp"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
