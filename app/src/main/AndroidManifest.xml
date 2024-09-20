@@ -40,6 +40,8 @@
         <activity android:name=".RedefinirSenhaCodigo" />
         <activity android:name=".TelaPrincipal" />
         <activity android:name=".SolicitarCesta" />
+        <activity android:name=".TelaPrincipalCarente" />
+        <activity android:name=".TelaPrincipalVol" />
     </application>
 
 </manifest>
