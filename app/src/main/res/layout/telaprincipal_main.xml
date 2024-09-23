@@ -123,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Somos a Hortelã, uma ONG com o objetivo de ajudar famílias de baixa renda,
-possiblitando o recebimento de cestas básicsa que irão potenciar a alimentação e a saúde dessas pessoas.
+possiblitando o recebimento de cestas básicas que irão potenciar a alimentação e a saúde dessas pessoas.
 "
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />

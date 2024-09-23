@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.concurrent.ExecutorService;
@@ -19,13 +20,23 @@ public class MainActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin;
     private TextView tvForgotPassword, tvNoAccount;
+    private SharedPreferences sharedPreferences;
     String[] mensagens = {"Preencha todos os campos", "E-mail ou senha inválidos"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        // Verifica se o usuário já está logado
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("isLoggedIn", false)) {
+            String email = sharedPreferences.getString("email", "");
+            int accessLevel = sharedPreferences.getInt("accessLevel", -1);
+            abrirTelaPrincipal(email, accessLevel);
+            return; // Impede que a tela de login seja carregada novamente
+        }
+
+        setContentView(R.layout.activity_main);
         IniciarComponentes();
 
         tvNoAccount.setOnClickListener(v -> {
@@ -80,23 +91,35 @@ public class MainActivity extends AppCompatActivity {
                     String[] userData = databaseHelper.getUserDataByEmail(email);  // Recupera os dados do usuário
                     String nome = userData != null ? userData[0] : "Usuário"; // Obtém o nome do array ou usa um valor padrão
 
-                    Intent intent = null;
-                    if (accessLevel == 0) {
-                        intent = new Intent(MainActivity.this, TelaPrincipal.class);
-                    } else if (accessLevel == 1) {
-                        intent = new Intent(MainActivity.this, TelaPrincipalCarente.class);
-                    } else if (accessLevel == 2) {
-                        intent = new Intent(MainActivity.this, TelaPrincipalVol.class);
-                    }
+                    // Salvar o estado de login e detalhes do usuário
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.putString("email", email);
+                    editor.putString("nome", nome);
+                    editor.putInt("accessLevel", accessLevel);
+                    editor.apply();
 
-                    if (intent != null) {
-                        intent.putExtra("email", email);  // Passa o e-mail do usuário
-                        intent.putExtra("nome", nome);    // Passa o nome do usuário
-                        startActivity(intent);
-                        finish();
-                    }
+                    abrirTelaPrincipal(email, accessLevel);
                 }
             });
         });
+    }
+
+    private void abrirTelaPrincipal(String email, int accessLevel) {
+        Intent intent = null;
+
+        if (accessLevel == 0) {
+            intent = new Intent(MainActivity.this, TelaPrincipal.class);
+        } else if (accessLevel == 1) {
+            intent = new Intent(MainActivity.this, TelaPrincipalCarente.class);
+        } else if (accessLevel == 2) {
+            intent = new Intent(MainActivity.this, TelaPrincipalVol.class);
+        }
+
+        if (intent != null) {
+            intent.putExtra("email", email);  // Passa o e-mail do usuário
+            startActivity(intent);
+            finish();
+        }
     }
 }

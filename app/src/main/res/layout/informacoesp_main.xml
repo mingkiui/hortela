@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#E9E6D5">
@@ -12,11 +13,14 @@
             android:id="@+id/btnClose"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_close"
-            android:contentDescription="Fechar" />
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Fechar"
+            android:src="@drawable/ic_close" />
 
         <!-- Ícone de Usuário -->
         <ImageView
@@ -24,9 +28,10 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="45dp"
+            android:contentDescription="Ícone do Usuário"
             android:src="@drawable/ic_user"
-            android:contentDescription="Ícone do Usuário" />
+            tools:ignore="ImageContrastCheck" />
 
         <!-- Texto Nome Completo -->
         <TextView
@@ -51,7 +56,8 @@
             android:enabled="false"
             android:text="**********************"
             android:textColor="#3B5234"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <!-- Texto R.G. -->
         <TextView
@@ -76,7 +82,8 @@
             android:enabled="false"
             android:text="**********************"
             android:textColor="#3B5234"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <!-- Texto CPF -->
         <TextView
@@ -101,7 +108,8 @@
             android:enabled="false"
             android:text="**********************"
             android:textColor="#3B5234"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <!-- Texto Endereço -->
         <TextView
@@ -126,7 +134,8 @@
             android:enabled="false"
             android:text="**********************"
             android:textColor="#3B5234"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <!-- Botão Editar Perfil -->
         <Button
@@ -140,16 +149,6 @@
             android:backgroundTint="#3D5532"
             android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/UserInformation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editProfileButton"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
-            android:text="Informações de Usuário"
-            android:backgroundTint="#3D5532"
-            android:textColor="@color/white" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

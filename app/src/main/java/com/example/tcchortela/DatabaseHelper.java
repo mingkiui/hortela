@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class DatabaseHelper {
 
-    private static final String DB_URL = "jdbc:jtds:sqlserver://172.19.1.168/dbHort";
+    private static final String DB_URL = "jdbc:jtds:sqlserver://172.19.1.173/dbHort";
     private static final String USER = "sa";
     private static final String PASS = "@ITB123456";
 
@@ -53,13 +53,7 @@ public class DatabaseHelper {
             e.printStackTrace();
             return false;
         } finally {
-            try {
-                if (conn != null) {
-                    conn.close(); // Fechar conexão
-                }
-            } catch (Exception e) {
-                Log.e("DatabaseHelper", "Erro ao fechar conexão: " + e.getMessage());
-            }
+            closeConnection(conn);
         }
     }
 
@@ -78,8 +72,7 @@ public class DatabaseHelper {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                int accessLevel = rs.getInt("access"); // Pegando o nível de acesso do usuário
-                return accessLevel; // Retornando o nível de acesso
+                return rs.getInt("access"); // Retornando o nível de acesso
             } else {
                 return -1; // Usuário não encontrado ou senha incorreta
             }
@@ -88,13 +81,7 @@ public class DatabaseHelper {
             e.printStackTrace();
             return -1;
         } finally {
-            try {
-                if (conn != null) {
-                    conn.close(); // Fechar conexão
-                }
-            } catch (Exception e) {
-                Log.e("DatabaseHelper", "Erro ao fechar conexão: " + e.getMessage());
-            }
+            closeConnection(conn);
         }
     }
 
@@ -109,12 +96,10 @@ public class DatabaseHelper {
             String query = "SELECT nome, email FROM users WHERE email = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, email);
-
             ResultSet rs = stmt.executeQuery();
+
             if (rs.next()) {
-                String nome = rs.getString("nome");
-                String emailValue = rs.getString("email");
-                return new String[]{nome, emailValue}; // Retorna o nome e o e-mail do usuário
+                return new String[]{rs.getString("nome"), rs.getString("email")}; // Retorna o nome e o e-mail do usuário
             } else {
                 return null; // Usuário não encontrado
             }
@@ -123,6 +108,99 @@ public class DatabaseHelper {
             e.printStackTrace();
             return null;
         } finally {
+            closeConnection(conn);
+        }
+    }
+
+    // Método para verificar se o e-mail já está cadastrado
+    public static boolean isEmailRegistered(String email) {
+        Connection conn = connect();
+        if (conn == null) {
+            return false;
+        }
+
+        try {
+            String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next() && rs.getInt(1) > 0; // Retorna true se o e-mail estiver cadastrado
+        } catch (Exception e) {
+            Log.e("DatabaseHelper", "Erro ao verificar e-mail: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeConnection(conn);
+        }
+    }
+
+    // Método para atualizar as informações do beneficiário
+    public static boolean updateBeneficiaryInfo(String email, String nome, String telefone, String cpf) {
+        Connection conn = connect();
+        if (conn == null) {
+            return false;
+        }
+
+        try {
+            String query = "UPDATE users SET nome = ?, telefone = ?, cpf = ? WHERE email = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, nome);
+            stmt.setString(2, telefone);
+            stmt.setString(3, cpf);
+            stmt.setString(4, email);
+            stmt.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            Log.e("DatabaseHelper", "Erro ao atualizar informações do beneficiário: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeConnection(conn);
+        }
+    }
+
+    // Método para atualizar o nível de acesso do usuário
+    public static boolean updateAccessLevel(String email, int accessLevel) {
+        Connection conn = connect();
+        if (conn == null) {
+            return false;
+        }
+
+        try {
+            String query = "UPDATE users SET access = ? WHERE email = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, accessLevel);
+            stmt.setString(2, email);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0; // Retorna verdadeiro se a atualização foi bem-sucedida
+        } catch (Exception e) {
+            Log.e("DatabaseHelper", "Erro ao atualizar nível de acesso: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeConnection(conn);
+        }
+    }
+
+    // Método para apagar a conta do usuário
+    public static boolean deleteUserAccount(String email) {
+        Connection conn = connect();
+        if (conn == null) {
+            return false;
+        }
+
+        try {
+            String query = "DELETE FROM users WHERE email = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, email);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0; // Retorna true se a conta foi apagada
+        } catch (Exception e) {
+            Log.e("DatabaseHelper", "Erro ao apagar conta: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
             try {
                 if (conn != null) {
                     conn.close(); // Fechar conexão
@@ -130,6 +208,17 @@ public class DatabaseHelper {
             } catch (Exception e) {
                 Log.e("DatabaseHelper", "Erro ao fechar conexão: " + e.getMessage());
             }
+        }
+    }
+
+    // Método para fechar a conexão
+    private static void closeConnection(Connection conn) {
+        try {
+            if (conn != null) {
+                conn.close(); // Fechar conexão
+            }
+        } catch (Exception e) {
+            Log.e("DatabaseHelper", "Erro ao fechar conexão: " + e.getMessage());
         }
     }
 }
