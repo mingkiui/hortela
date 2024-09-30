@@ -10,15 +10,15 @@
         android:padding="16dp">
 
         <!-- Ícone de fechar -->
-        <ImageButton
+        <ImageView
             android:id="@+id/btnClose"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:contentDescription="Close icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_close"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:contentDescription="Fechar"
+            android:padding="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"/>
 
         <!-- Ícone de perfil -->
         <ImageView

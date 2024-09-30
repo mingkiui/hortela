@@ -37,34 +37,25 @@
             android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/rounded_edittext"
             android:hint="E-mail"
-            android:layout_below="@id/tvTitle"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"/>
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/input_subject"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:background="@drawable/rounded_edittext"
-            android:hint="Assunto"
+            android:hint="Escreva algumas palavras..."
             android:layout_below="@id/input_email"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
 
-        <TextView
-            android:id="@+id/forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/input_subject"
-            android:textColor="#3D5532"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="9dp"
-            android:text="@string/forgot_password" />
 
         <Button
             android:id="@+id/btnSend"
@@ -80,7 +71,7 @@
             android:textSize="18sp"
             app:cornerRadius="10dp"
             app:iconPadding="10dp"
-            android:layout_below="@id/forgot_password"/>
+            android:layout_below="@id/input_subject"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -41,7 +41,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/rounded_edittext"
-            android:hint="Nome"
+            android:hint="Nome Completo"
             android:padding="12dp"
             android:textColor="#2D492D"
             android:textColorHint="#2D492D"

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -14,7 +14,7 @@ public class Perfil extends AppCompatActivity {
 
     private TextView nameValue, emailValue;
     private Button personalInformation, editExit, editdrop;
-    private ImageButton btnClose;
+    private ImageView btnClose;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -34,12 +34,10 @@ public class Perfil extends AppCompatActivity {
         nameValue.setText(userName);
         emailValue.setText(userEmail);
 
-        // Botão para fechar a tela e voltar para a tela principal
         btnClose.setOnClickListener(v -> {
-            Intent intent = new Intent(Perfil.this, TelaPrincipal.class);
-            startActivity(intent);
-            finish();
+            finish(); // Fecha a atividade atual
         });
+
 
         // Botão para deslogar e ir para a tela de login
         editExit.setOnClickListener(v -> {

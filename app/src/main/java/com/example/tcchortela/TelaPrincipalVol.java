@@ -40,7 +40,7 @@ public class TelaPrincipalVol extends AppCompatActivity {
         tvAcessarConta.setOnClickListener(acessarContaListener);
 
         View.OnClickListener pedirCestaListener = v -> {
-            Intent intent = new Intent(TelaPrincipalVol.this, ConsultarCesta.class);
+            Intent intent = new Intent(TelaPrincipalVol.this, CalendarioVol.class);
             startActivity(intent);
             finish();
         };
@@ -48,7 +48,7 @@ public class TelaPrincipalVol extends AppCompatActivity {
         tvCalendario.setOnClickListener(pedirCestaListener);
 
         tvDoacao.setOnClickListener(v -> {
-            Intent intent = new Intent(TelaPrincipalVol.this, RealizarDoacao.class);
+            Intent intent = new Intent(TelaPrincipalVol.this, DoacaoPix.class);
             startActivity(intent);
         });
 

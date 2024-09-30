@@ -29,19 +29,18 @@
         </activity>
         <activity android:name=".CalendarioVol" />
         <activity android:name=".DoacaoPix" />
-        <activity android:name=".DoacaoCartao" />
         <activity android:name=".FaleConosco" />
         <activity android:name=".InformacoesP" />
         <activity android:name=".InscricaoBen" />
         <activity android:name=".InscricaoVol" />
         <activity android:name=".Perfil" />
-        <activity android:name=".RealizarDoacao" />
         <activity android:name=".RedefinirSenha" />
         <activity android:name=".RedefinirSenhaCodigo" />
         <activity android:name=".TelaPrincipal" />
         <activity android:name=".SolicitarCesta" />
         <activity android:name=".TelaPrincipalCarente" />
         <activity android:name=".TelaPrincipalVol" />
+        <activity android:name=".ConsultarCesta" />
     </application>
 
 </manifest>

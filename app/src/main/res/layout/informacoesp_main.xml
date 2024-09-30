@@ -54,43 +54,41 @@
             android:layout_below="@+id/labelNome"
             android:layout_centerHorizontal="true"
             android:enabled="false"
-            android:text="**********************"
             android:textColor="#3B5234"
             android:textSize="18sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <!-- Texto R.G. -->
         <TextView
-            android:id="@+id/labelRG"
+            android:id="@+id/labelTelefone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtNome"
             android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
-            android:text="R.G.:"
+            android:text="Telefone:"
             android:textColor="#3B5234"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <!-- Campo Editável R.G. -->
         <EditText
-            android:id="@+id/txtRG"
+            android:id="@+id/txtTelefone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/labelRG"
+            android:layout_below="@+id/labelTelefone"
             android:layout_centerHorizontal="true"
             android:enabled="false"
-            android:text="**********************"
             android:textColor="#3B5234"
             android:textSize="18sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <!-- Texto CPF -->
         <TextView
             android:id="@+id/labelCPF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtRG"
+            android:layout_below="@+id/txtTelefone"
             android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
             android:text="C.P.F.:"
@@ -106,10 +104,9 @@
             android:layout_below="@+id/labelCPF"
             android:layout_centerHorizontal="true"
             android:enabled="false"
-            android:text="**********************"
             android:textColor="#3B5234"
             android:textSize="18sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <!-- Texto Endereço -->
         <TextView
@@ -132,10 +129,9 @@
             android:layout_below="@+id/labelEndereco"
             android:layout_centerHorizontal="true"
             android:enabled="false"
-            android:text="**********************"
             android:textColor="#3B5234"
             android:textSize="18sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <!-- Botão Editar Perfil -->
         <Button
@@ -146,6 +142,17 @@
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:text="Editar Perfil"
+            android:backgroundTint="#3D5532"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/editSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editProfileButton"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="Salvar"
             android:backgroundTint="#3D5532"
             android:textColor="@color/white" />
 

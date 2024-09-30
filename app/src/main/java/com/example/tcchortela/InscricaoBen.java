@@ -2,17 +2,24 @@ package com.example.tcchortela;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class InscricaoBen extends AppCompatActivity {
 
     private EditText etNameBen, etNumberBen, etEmailBen, etCpf;
     private Button btnNext;
     private ImageView btnClose;
+    String[] mensagens  = {"Preencha todos os campos",
+            "Inscrição realizada com sucesso!",
+            "Erro ao verificar informações. Tente novamente",
+            "Conta não cadastrada nos nossos servidores" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +38,24 @@ public class InscricaoBen extends AppCompatActivity {
         btnClose.setOnClickListener(v -> finish());
 
         // Botão Próximo
-        btnNext.setOnClickListener(v -> verificarEmailEAtualizar());
+        btnNext.setOnClickListener(v -> {
+            String nome = etNameBen.getText().toString().trim();
+            String telefone = etNumberBen.getText().toString().trim();
+            String email = etEmailBen.getText().toString().trim();
+            String cpf = etCpf.getText().toString().trim();
+
+            if ( nome.isEmpty() || telefone.isEmpty() ||email.isEmpty() || cpf.isEmpty()) {
+                Snackbar snackbar = Snackbar.make(v, mensagens[0], Snackbar.LENGTH_SHORT);
+                snackbar.setBackgroundTint(Color.WHITE);
+                snackbar.setTextColor(Color.BLACK);
+                snackbar.show();
+            } else {
+                verificarEmailEAtualizar(v); // Chame a função aqui ou autentique, conforme a lógica desejada.
+            }
+        });
     }
 
-    private void verificarEmailEAtualizar() {
+    private void verificarEmailEAtualizar(View v) {
         String nome = etNameBen.getText().toString().trim();
         String telefone = etNumberBen.getText().toString().trim();
         String email = etEmailBen.getText().toString().trim();
@@ -46,16 +67,25 @@ public class InscricaoBen extends AppCompatActivity {
             if (DatabaseHelper.updateBeneficiaryInfo(email, nome, telefone, cpf)) {
                 // Atualiza o nível de acesso para 1
                 if (DatabaseHelper.updateAccessLevel(email, 1)) {
-                    Toast.makeText(this, "Inscrição realizada com sucesso!", Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar = Snackbar.make(v, mensagens[1], Snackbar.LENGTH_SHORT);
+                    snackbar.setBackgroundTint(Color.WHITE);
+                    snackbar.setTextColor(Color.BLACK);
+                    snackbar.show();
                     Intent intent = new Intent(InscricaoBen.this, TelaPrincipalCarente.class);
                     startActivity(intent);
                     finish();
                 }
             } else {
-                Toast.makeText(this, "Erro ao verificar informações. Tente novamente.", Toast.LENGTH_SHORT).show();
+                Snackbar snackbar = Snackbar.make(v, mensagens[2], Snackbar.LENGTH_SHORT);
+                snackbar.setBackgroundTint(Color.WHITE);
+                snackbar.setTextColor(Color.BLACK);
+                snackbar.show();
             }
         } else {
-            Toast.makeText(this, "Conta não cadastrada nos nossos servidores.", Toast.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(v, mensagens[3], Snackbar.LENGTH_SHORT);
+            snackbar.setBackgroundTint(Color.WHITE);
+            snackbar.setTextColor(Color.BLACK);
+            snackbar.show();
         }
     }
 }

@@ -14,4 +14,9 @@
     <string name="forgot_password">Esqueceu a senha?</string>
     <string name="button_send">Enviar</string>
     <string name="title_activity_calendariovol_main">calendariovol_main</string>
+    <string name="data_selecionada">Data selecionada: %1$d/%2$d/%3$d</string>
+    <string name="data_salva_sucesso">Data de disponibilidade salva!</string>
+    <string name="erro_salvar_data">Erro ao salvar a data</string>
+    <string name="atividade">Atividade: %1$s</string>
+    <string name="atividade_nao_definida">Nenhuma atividade definida.</string>
 </resources>

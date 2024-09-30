@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
@@ -9,12 +10,16 @@
         android:id="@+id/btnClose"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_close"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/close_button" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/close_button"
+        android:src="@drawable/ic_close"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <!-- Título Doações -->
     <TextView
@@ -38,11 +43,6 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/doacaopix" />
 
-    <!-- Texto Chave Pix -->
-
-    <!-- Botão de copiar chave Pix -->
-
-    <!-- QR Code -->
 
     <TextView
         android:id="@+id/tvChavePix"
@@ -101,17 +101,6 @@
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true" />
 
-    <!-- Telefone -->
-    <TextView
-        android:id="@+id/tvTelefone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(11) 91234-5678"
-        android:textColor="#3D5532"
-        android:textSize="16sp"
-        android:layout_below="@id/tvEmail"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true" />
 
     <!-- Texto de Dúvidas -->
     <TextView
@@ -121,7 +110,7 @@
         android:text="Dúvidas? Fale conosco!"
         android:textColor="#3D5532"
         android:textSize="14sp"
-        android:layout_below="@id/tvTelefone"
+        android:layout_below="@id/tvEmail"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true" />
 

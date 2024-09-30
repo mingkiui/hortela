@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class TelaPrincipalCarente extends AppCompatActivity {
 
     private ImageView icAcessarConta, icConsultarCesta;
-    private TextView tvAcessarConta, tvConsultarCesta, tvDoacao, tvAjuda;
+    private TextView tvAcessarConta, tvConsultarCesta, tvDoacao, tvAjuda, tvInscVol;
     private String userEmail;
     private String userNome;
 
@@ -29,6 +29,7 @@ public class TelaPrincipalCarente extends AppCompatActivity {
         tvConsultarCesta = findViewById(R.id.tvConsultarCesta);
         tvDoacao = findViewById(R.id.tvDoacao);
         tvAjuda = findViewById(R.id.tvAjuda);
+        tvInscVol = findViewById(R.id.tvInscVol);
 
         View.OnClickListener acessarContaListener = v -> {
             Intent intent = new Intent(TelaPrincipalCarente.this, Perfil.class);
@@ -49,12 +50,17 @@ public class TelaPrincipalCarente extends AppCompatActivity {
         tvConsultarCesta.setOnClickListener(pedirCestaListener);
 
         tvDoacao.setOnClickListener(v -> {
-            Intent intent = new Intent(TelaPrincipalCarente.this, RealizarDoacao.class);
+            Intent intent = new Intent(TelaPrincipalCarente.this, DoacaoPix.class);
             startActivity(intent);
         });
 
         tvAjuda.setOnClickListener(v -> {
             Intent intent = new Intent(TelaPrincipalCarente.this, FaleConosco.class);
+            startActivity(intent);
+        });
+
+        tvInscVol.setOnClickListener(v -> {
+            Intent intent = new Intent(TelaPrincipalCarente.this, InscricaoVol.class);
             startActivity(intent);
         });
     }

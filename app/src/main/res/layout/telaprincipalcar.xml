@@ -131,11 +131,20 @@ possiblitando o recebimento de cestas básicas que irão potenciar a alimentaç�
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
+            <TextView
+                android:id="@+id/tvInscVol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDescricaoSobreNos"
+                android:layout_marginTop="6dp"
+                android:padding="2dp"
+                android:text="Quer ajudar o projeto mais ainda? Clique aqui e seja um voluntário!"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold" />
+
 
         </LinearLayout>
 
-
-        <!-- Botões Inferiores -->
 
 
         <ImageView
@@ -150,7 +159,7 @@ possiblitando o recebimento de cestas básicas que irão potenciar a alimentaç�
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="54dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
             <LinearLayout

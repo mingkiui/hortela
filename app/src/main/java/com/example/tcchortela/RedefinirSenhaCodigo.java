@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,8 +15,9 @@ import java.util.Random;
 
 public class RedefinirSenhaCodigo extends AppCompatActivity {
 
-    /*/private EditText etDigit1, etDigit2, etDigit3, etDigit4, editEmail;
+    private EditText etDigit1, etDigit2, etDigit3, etDigit4, editEmail;
     private Button btnResendCode, btnResetPassword;
+    private ImageButton btnClose;
     private TextView tvCodeSent, tvAccountNotFound;
 
     private String generatedCode;  // Código gerado
@@ -36,48 +38,46 @@ public class RedefinirSenhaCodigo extends AppCompatActivity {
         btnResetPassword = findViewById(R.id.btnResetPassword);
         tvCodeSent = findViewById(R.id.tvCodeSent);
         tvAccountNotFound = findViewById(R.id.tvAccountNotFound);
+        btnClose = findViewById(R.id.btnClose);
 
         // Gerar e enviar o código ao clicar em "Enviar código"
-        btnResendCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userEmail = editEmail.getText().toString().trim();
-                if (!userEmail.isEmpty()) {
-                    // Gerar um código de 4 dígitos
-                    generatedCode = generateCode();
-                    // Enviar o e-mail com o código
-                    try {
-                        MailjetEmailSender.sendEmail(userEmail, generatedCode);
-                        // Atualizar visibilidade e informar o envio
-                        tvCodeSent.setText("*Foi enviado um código de confirmação para o e-mail " + userEmail);
-                        tvCodeSent.setVisibility(View.VISIBLE);
-                        tvAccountNotFound.setVisibility(View.GONE);
-                        Toast.makeText(RedefinirSenhaCodigo.this, "Código enviado para " + userEmail, Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(RedefinirSenhaCodigo.this, "Erro ao enviar o e-mail.", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(RedefinirSenhaCodigo.this, "Por favor, insira um e-mail", Toast.LENGTH_SHORT).show();
-                }
+        btnResendCode.setOnClickListener(v -> {
+            userEmail = editEmail.getText().toString().trim();
+            if (!userEmail.isEmpty()) {
+                // Gerar um código de 4 dígitos
+                generatedCode = generateCode();
+                // Enviar o e-mail com o código usando Sendinblue
+                SendinblueEmailSender.sendEmail(userEmail, generatedCode);
+
+                // Atualizar visibilidade e informar o envio
+                tvCodeSent.setText("*Foi enviado um código de confirmação para o e-mail " + userEmail);
+                tvCodeSent.setVisibility(View.VISIBLE);
+                tvAccountNotFound.setVisibility(View.GONE);
+                Toast.makeText(RedefinirSenhaCodigo.this, "Código enviado para " + userEmail, Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(RedefinirSenhaCodigo.this, "Por favor, insira um e-mail", Toast.LENGTH_SHORT).show();
             }
         });
 
         // Verificar o código ao clicar em "Redefinir Senha"
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String enteredCode = etDigit1.getText().toString() + etDigit2.getText().toString() +
-                        etDigit3.getText().toString() + etDigit4.getText().toString();
+        btnResetPassword.setOnClickListener(v -> {
+            String enteredCode = etDigit1.getText().toString() + etDigit2.getText().toString() +
+                    etDigit3.getText().toString() + etDigit4.getText().toString();
+            userEmail = editEmail.getText().toString().trim();
 
-                if (generatedCode != null && enteredCode.equals(generatedCode)) {
-                    // Código correto, navegar para tela de redefinir senha
-                    Intent intent = new Intent(RedefinirSenhaCodigo.this, RedefinirSenha.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(RedefinirSenhaCodigo.this, "Código incorreto, tente novamente", Toast.LENGTH_SHORT).show();
-                }
+            if (enteredCode.equals(generatedCode)) {
+                // Código correto, navegar para tela de redefinir senha
+                Intent intent = new Intent(RedefinirSenhaCodigo.this, RedefinirSenha.class);
+                intent.putExtra("EMAIL", userEmail);
+                startActivity(intent);
+            } else {
+                Toast.makeText(RedefinirSenhaCodigo.this, "Código incorreto, tente novamente", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        btnClose.setOnClickListener(v -> {
+            finish(); // Fecha a atividade atual
         });
     }
 
@@ -86,5 +86,5 @@ public class RedefinirSenhaCodigo extends AppCompatActivity {
         Random random = new Random();
         int code = random.nextInt(9000) + 1000;  // Gera um número entre 1000 e 9999
         return String.valueOf(code);
-    }/*/
+    }
 }

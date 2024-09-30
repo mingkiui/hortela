@@ -319,29 +319,36 @@
         android:layout_below="@id/btnAdicionar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:background="@drawable/bg_dia"
-        android:clickable="true"
-        android:focusable="true"
         android:padding="8dp"
-        android:text="Selecione uma data"
+        android:text="Selecione a data da sua disponibilidade!"
         android:textColor="@color/green"
         android:textSize="16sp"
         tools:ignore="TouchTargetSizeCheck" />
 
     <!-- Campo de Descrição -->
-    <EditText
+    <TextView
         android:id="@+id/editDescricao"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:hint="Descrição:"
+        android:text="Descrição:"
         android:textColorHint="@color/green"
         android:backgroundTint="@color/green"
         android:textColor="@color/green"
         android:padding="10dp"
+        android:textSize="16sp"
         android:gravity="top"
         android:layout_below="@id/txtData"
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editDescricao"
+        android:text="Aguarde até que suas atividades sejam atribuídas"
+        android:textColor="@color/green"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
 
 </RelativeLayout>

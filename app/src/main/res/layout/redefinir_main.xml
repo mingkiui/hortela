@@ -57,7 +57,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_edittext"
             android:hint="Repita nova senha"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:padding="12dp" />
 
         <!-- Botão Redefinir Senha -->

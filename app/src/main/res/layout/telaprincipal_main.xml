@@ -2,11 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:background="#E9E6D5">
+        android:background="#E9E6D5"
+        android:padding="16dp">
 
         <!-- Topo com logo e botões -->
 
@@ -101,9 +102,9 @@
             android:id="@+id/SobreNos"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_below="@id/navbar"
-        android:layout_marginTop="8dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="8dp"
             android:background="@android:color/white"
             android:elevation="4dp"
             android:orientation="vertical"
@@ -128,11 +129,20 @@ possiblitando o recebimento de cestas básicas que irão potenciar a alimentaç�
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
+            <TextView
+                android:id="@+id/tvInscVol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDescricaoSobreNos"
+                android:layout_marginTop="6dp"
+                android:padding="2dp"
+                android:text="Quer ajudar o projeto mais ainda? Clique aqui e seja um voluntário!"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold" />
+
 
         </LinearLayout>
 
-
-        <!-- Botões Inferiores -->
 
 
         <ImageView
@@ -144,10 +154,11 @@ possiblitando o recebimento de cestas básicas que irão potenciar a alimentaç�
             android:src="@drawable/fundoindex" />
 
         <LinearLayout
+            android:id="@+id/layoutSession"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="54dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -164,6 +175,7 @@ possiblitando o recebimento de cestas básicas que irão potenciar a alimentaç�
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
+
                 <TextView
                     android:id="@+id/tvAjuda"
                     android:layout_width="wrap_content"
@@ -173,10 +185,10 @@ possiblitando o recebimento de cestas básicas que irão potenciar a alimentaç�
                     android:text="Ajuda?"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
         </LinearLayout>
-
 
     </RelativeLayout>
 

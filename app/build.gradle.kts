@@ -75,7 +75,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation ("net.sourceforge.jtds:jtds:1.3.1")
     implementation ("com.konghq:unirest-java:3.13.6")
-    implementation ("com.mailjet:mailjet-client:5.2.0")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("org.json:json:20220320")
 
 

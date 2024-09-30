@@ -2,19 +2,22 @@ package com.example.tcchortela;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class SolicitarCesta extends AppCompatActivity {
 
-    private RadioGroup radioGroup1, radioGroup2, radioGroup3;
+    private RadioGroup radioGroup1, radioGroup2;
     private Button btnSend;
     private ImageButton btnClose;
+
+    String[] mensagens = {"Infelizmente, você não entrou nos critérios"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,6 @@ public class SolicitarCesta extends AppCompatActivity {
         // Inicialização dos elementos da interface
         radioGroup1 = findViewById(R.id.radioGroup1Right);
         radioGroup2 = findViewById(R.id.radioGroup2);
-        radioGroup3 = findViewById(R.id.radioGroup3Left); // Ajuste se necessário
         btnSend = findViewById(R.id.btnSend);
         btnClose = findViewById(R.id.btnClose);
 
@@ -32,7 +34,7 @@ public class SolicitarCesta extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviarRespostas();
+                enviarRespostas(v);
             }
         });
 
@@ -45,7 +47,7 @@ public class SolicitarCesta extends AppCompatActivity {
         });
     }
 
-    private void enviarRespostas() {
+    private void enviarRespostas(View v) {
         // Captura as respostas selecionadas
         int selectedId1 = radioGroup1.getCheckedRadioButtonId();
         int selectedId2 = radioGroup2.getCheckedRadioButtonId();
@@ -56,7 +58,10 @@ public class SolicitarCesta extends AppCompatActivity {
 
         // Condição para impedir o redirecionamento
         if (temUmaPessoa && rendaAlta) {
-            Toast.makeText(this, "Você não pode se inscrever.", Toast.LENGTH_LONG).show();
+            Snackbar snackbar = Snackbar.make(v, mensagens[0], Snackbar.LENGTH_SHORT);
+            snackbar.setBackgroundTint(Color.WHITE);
+            snackbar.setTextColor(Color.BLACK);
+            snackbar.show();
             return; // Não redireciona
         }
 
