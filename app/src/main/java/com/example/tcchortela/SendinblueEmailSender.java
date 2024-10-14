@@ -46,7 +46,7 @@ class Recipient {
 interface SendinblueService {
     @Headers({
             "accept: application/json",
-            "api-key: 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",
+            "api-key: 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",
             "content-type: application/json"
     })
     @POST("smtp/email")

@@ -31,19 +31,13 @@ public class SolicitarCesta extends AppCompatActivity {
         btnClose = findViewById(R.id.btnClose);
 
         // Configuração do listener para o botão de enviar
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                enviarRespostas(v);
-            }
-        });
+        btnSend.setOnClickListener(v -> enviarRespostas(v));
 
         // Configuração do listener para o botão de fechar
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish(); // Fecha a atividade atual
-            }
+        btnClose.setOnClickListener(v -> {
+            Intent intent = new Intent(SolicitarCesta.this, TelaPrincipal.class);
+            startActivity(intent);
+            finish();
         });
     }
 
@@ -52,9 +46,18 @@ public class SolicitarCesta extends AppCompatActivity {
         int selectedId1 = radioGroup1.getCheckedRadioButtonId();
         int selectedId2 = radioGroup2.getCheckedRadioButtonId();
 
+        // Verifica se nada foi selecionado
+        if (selectedId1 == -1 || selectedId2 == -1) {
+            Snackbar snackbar = Snackbar.make(v, "Por favor, responda as perguntas", Snackbar.LENGTH_SHORT);
+            snackbar.setBackgroundTint(Color.WHITE);
+            snackbar.setTextColor(Color.BLACK);
+            snackbar.show();
+            return; // Não redireciona
+        }
+
         // Verifica as respostas
-        boolean temUmaPessoa = (selectedId1 == R.id.rb1); // Se "a) 1" está selecionado
-        boolean rendaAlta = (selectedId2 == R.id.rb7 || selectedId2 == R.id.rb8); // "c" ou "d" estão selecionados
+        boolean temUmaPessoa = (selectedId1 == R.id.rb1);
+        boolean rendaAlta = (selectedId2 == R.id.rb7 || selectedId2 == R.id.rb8);
 
         // Condição para impedir o redirecionamento
         if (temUmaPessoa && rendaAlta) {
@@ -63,10 +66,10 @@ public class SolicitarCesta extends AppCompatActivity {
             snackbar.setTextColor(Color.BLACK);
             snackbar.show();
             return; // Não redireciona
+        } else {
+            // Se a condição não for atendida, segue para a InscricaoBen.java
+            Intent intent = new Intent(SolicitarCesta.this, InscricaoBen.class);
+            startActivity(intent);
         }
-
-        // Se a condição não for atendida, segue para a InscricaoBen.java
-        Intent intent = new Intent(SolicitarCesta.this, InscricaoBen.class);
-        startActivity(intent);
     }
 }

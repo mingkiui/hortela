@@ -1,8 +1,11 @@
 package com.example.tcchortela;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -10,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Random;
 
@@ -22,7 +27,7 @@ public class RedefinirSenhaCodigo extends AppCompatActivity {
 
     private String generatedCode;  // Código gerado
     private String userEmail;  // Email do usuário
-
+    String [] mensagem = {"Por favor, insira um e-mail", "Código incorreto, tente novamente", "Conta não cadastrada nos nossos servidores", "Por favor, insira um código"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,21 +49,39 @@ public class RedefinirSenhaCodigo extends AppCompatActivity {
         btnResendCode.setOnClickListener(v -> {
             userEmail = editEmail.getText().toString().trim();
             if (!userEmail.isEmpty()) {
-                // Gerar um código de 4 dígitos
-                generatedCode = generateCode();
-                // Enviar o e-mail com o código usando Sendinblue
-                SendinblueEmailSender.sendEmail(userEmail, generatedCode);
 
-                // Atualizar visibilidade e informar o envio
-                tvCodeSent.setText("*Foi enviado um código de confirmação para o e-mail " + userEmail);
-                tvCodeSent.setVisibility(View.VISIBLE);
-                tvAccountNotFound.setVisibility(View.GONE);
-                Toast.makeText(RedefinirSenhaCodigo.this, "Código enviado para " + userEmail, Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(RedefinirSenhaCodigo.this, "Por favor, insira um e-mail", Toast.LENGTH_SHORT).show();
+                // Verificar se o email está registrado usando isEmailRegistered
+                if (DatabaseHelper.isEmailRegistered(userEmail)) {
+                    // Gerar um código de 4 dígitos
+                    generatedCode = generateCode();
+                    // Enviar o e-mail com o código usando Sendinblue
+                    SendinblueEmailSender.sendEmail(userEmail, generatedCode);
+
+                    // Atualizar visibilidade e informar o envio
+                    tvCodeSent.setText("*Foi enviado um código de confirmação para o e-mail " + userEmail);
+                    tvCodeSent.setVisibility(View.VISIBLE);
+                    tvAccountNotFound.setVisibility(View.GONE);
+                    Toast.makeText(RedefinirSenhaCodigo.this, "Código enviado para " + userEmail, Toast.LENGTH_SHORT).show();
+                } else {
+                    // Email não encontrado, exibir mensagem de erro
+                    hideKeyboard(v);
+                    tvCodeSent.setVisibility(View.GONE);
+                    tvAccountNotFound.setText("Conta não cadastrada nos nossos servidores");
+                    tvAccountNotFound.setVisibility(View.VISIBLE);
+                    Snackbar snackbar = Snackbar.make(v, mensagem[2], Snackbar.LENGTH_SHORT);
+                    snackbar.setBackgroundTint(Color.WHITE);
+                    snackbar.setTextColor(Color.BLACK);
+                    snackbar.show();
+                }
+            } else {
+                hideKeyboard(v);
+                Snackbar snackbar = Snackbar.make(v, mensagem[0], Snackbar.LENGTH_SHORT);
+                snackbar.setBackgroundTint(Color.WHITE);
+                snackbar.setTextColor(Color.BLACK);
+                snackbar.show();
             }
         });
+
 
         // Verificar o código ao clicar em "Redefinir Senha"
         btnResetPassword.setOnClickListener(v -> {
@@ -66,15 +89,29 @@ public class RedefinirSenhaCodigo extends AppCompatActivity {
                     etDigit3.getText().toString() + etDigit4.getText().toString();
             userEmail = editEmail.getText().toString().trim();
 
-            if (enteredCode.equals(generatedCode)) {
-                // Código correto, navegar para tela de redefinir senha
-                Intent intent = new Intent(RedefinirSenhaCodigo.this, RedefinirSenha.class);
-                intent.putExtra("EMAIL", userEmail);
-                startActivity(intent);
+            if (enteredCode.isEmpty()) {
+                // Se o código estiver vazio, exibe a mensagem de "insira um código"
+                Snackbar snackbar = Snackbar.make(v, "Por favor, insira um código", Snackbar.LENGTH_SHORT);
+                snackbar.setBackgroundTint(Color.WHITE);
+                snackbar.setTextColor(Color.BLACK);
+                snackbar.show();
             } else {
-                Toast.makeText(RedefinirSenhaCodigo.this, "Código incorreto, tente novamente", Toast.LENGTH_SHORT).show();
+                // Verifica se o código inserido está correto
+                if (enteredCode.equals(generatedCode)) {
+                    hideKeyboard(v);
+                    Intent intent = new Intent(RedefinirSenhaCodigo.this, RedefinirSenha.class);
+                    intent.putExtra("EMAIL", userEmail);
+                    startActivity(intent);
+                } else {
+                    // Se o código estiver incorreto, exibe a mensagem apropriada
+                    Snackbar snackbar = Snackbar.make(v, mensagem[1], Snackbar.LENGTH_SHORT);
+                    snackbar.setBackgroundTint(Color.WHITE);
+                    snackbar.setTextColor(Color.BLACK);
+                    snackbar.show();
+                }
             }
         });
+        
 
         btnClose.setOnClickListener(v -> {
             finish(); // Fecha a atividade atual
@@ -86,5 +123,12 @@ public class RedefinirSenhaCodigo extends AppCompatActivity {
         Random random = new Random();
         int code = random.nextInt(9000) + 1000;  // Gera um número entre 1000 e 9999
         return String.valueOf(code);
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

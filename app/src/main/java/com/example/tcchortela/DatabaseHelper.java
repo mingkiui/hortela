@@ -5,22 +5,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
 import android.util.Log;
 
 public class DatabaseHelper {
 
-    private static final String DB_URL = "jdbc:jtds:sqlserver://172.19.1.134/dbHort";
+    private static final String DB_URL = "jdbc:jtds:sqlserver://172.19.1.107/db8071";
     private static final String USER = "sa";
     private static final String PASS = "@ITB123456";
 
     private static DatabaseHelper instance;
 
-    // Conectar ao banco de dados SQL Server
     public static Connection connect() {
         Connection conn = null;
         try {
@@ -39,7 +34,6 @@ public class DatabaseHelper {
         return conn;
     }
 
-    // Método para registrar novo usuário
     public static boolean registerUser(String nome, String email, String pass) {
         Connection conn = connect();
         if (conn == null) {
@@ -64,49 +58,50 @@ public class DatabaseHelper {
         }
     }
 
-    // Método para verificar login
-    public static int loginUser(String email, String pass) {
+    public static Object[] loginUser(String email, String pass) {
         Connection conn = connect();
         if (conn == null) {
-            return -1; // Erro ao conectar ao banco
+            return new Object[]{-1, -1}; // Erro ao conectar ao banco
         }
 
         try {
-            String query = "SELECT access FROM users WHERE email = ? AND pass = ?";
+            String query = "SELECT user_id, access FROM users WHERE email = ? AND pass = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, email);
             stmt.setString(2, pass);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return rs.getInt("access"); // Retornando o nível de acesso
+                int userId = rs.getInt("user_id");
+                int accessLevel = rs.getInt("access");
+                return new Object[]{userId, accessLevel}; // Retornando o userId e o nível de acesso
             } else {
-                return -1; // Usuário não encontrado ou senha incorreta
+                return new Object[]{0, -1}; // Usuário não encontrado ou senha incorreta
             }
         } catch (Exception e) {
             Log.e("DatabaseHelper", "Erro ao realizar login: " + e.getMessage());
             e.printStackTrace();
-            return -1;
+            return new Object[]{-1, -1};
         } finally {
             closeConnection(conn);
         }
     }
 
-    // Método para recuperar nome e e-mail do usuário com base no e-mail
-    public static String[] getUserDataByEmail(String email) {
+    public static Object[] getUserDataByEmail(String email) {
         Connection conn = connect();
         if (conn == null) {
             return null;
         }
 
         try {
-            String query = "SELECT nome, email FROM users WHERE email = ?";
+            String query = "SELECT nome, email, user_id FROM users WHERE email = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return new String[]{rs.getString("nome"), rs.getString("email")}; // Retorna o nome e o e-mail do usuário
+                // Retorna o nome, email e o user_id como int
+                return new Object[]{rs.getString("nome"), rs.getString("email"), rs.getInt("user_id")};
             } else {
                 return null; // Usuário não encontrado
             }
@@ -119,7 +114,6 @@ public class DatabaseHelper {
         }
     }
 
-    // Método para verificar se o e-mail já está cadastrado
     public static boolean isEmailRegistered(String email) {
         Connection conn = connect();
         if (conn == null) {
@@ -141,8 +135,6 @@ public class DatabaseHelper {
             closeConnection(conn);
         }
     }
-
-    // Método para atualizar as informações do beneficiário
     public static boolean updateBeneficiaryInfo(String email, String nome, String telefone, String cpf) {
         Connection conn = connect();
         if (conn == null) {
@@ -166,35 +158,6 @@ public class DatabaseHelper {
             closeConnection(conn);
         }
     }
-
-    // Método para atualizar detalhes do beneficiário (nome, telefone, cpf, endereco)
-    public static boolean updateBeneficiaryDetails(String email, String nome, String telefone, String cpf, String endereco) {
-        Connection conn = connect();
-        if (conn == null) {
-            return false;
-        }
-
-        try {
-            String query = "UPDATE users SET nome = ?, telefone = ?, cpf = ?, endereco = ? WHERE email = ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, nome);
-            stmt.setString(2, telefone);
-            stmt.setString(3, cpf);
-            stmt.setString(4, endereco);
-            stmt.setString(5, email);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0; // Retorna true se a atualização foi bem-sucedida
-        } catch (Exception e) {
-            Log.e("DatabaseHelper", "Erro ao atualizar detalhes do beneficiário: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        } finally {
-            closeConnection(conn);
-        }
-    }
-
-
-    // Método para atualizar o nível de acesso do usuário
     public static boolean updateAccessLevel(String email, int accessLevel) {
         Connection conn = connect();
         if (conn == null) {
@@ -217,7 +180,6 @@ public class DatabaseHelper {
         }
     }
 
-    // Método para apagar a conta do usuário
     public static boolean deleteUserAccount(String email) {
         Connection conn = connect();
         if (conn == null) {
@@ -225,34 +187,29 @@ public class DatabaseHelper {
         }
 
         try {
-            // Começar uma transação
             conn.setAutoCommit(false);
 
-            // Primeiro, exclua da tabela voluntario
             String deleteVolunteerQuery = "DELETE FROM voluntario WHERE user_id = (SELECT user_id FROM users WHERE email = ?)";
             PreparedStatement stmtVolunteer = conn.prepareStatement(deleteVolunteerQuery);
             stmtVolunteer.setString(1, email);
             stmtVolunteer.executeUpdate();
 
-            // Agora, exclua da tabela users
             String deleteUserQuery = "DELETE FROM users WHERE email = ?";
             PreparedStatement stmtUser = conn.prepareStatement(deleteUserQuery);
             stmtUser.setString(1, email);
             int rowsAffected = stmtUser.executeUpdate();
-
-            // Se a exclusão do usuário for bem-sucedida, confirmar a transação
             if (rowsAffected > 0) {
                 conn.commit();
-                return true; // Retorna true se a conta foi apagada
+                return true;
             } else {
-                conn.rollback(); // Reverter em caso de falha na exclusão
+                conn.rollback();
                 return false;
             }
         } catch (Exception e) {
             Log.e("DatabaseHelper", "Erro ao apagar conta: " + e.getMessage());
             e.printStackTrace();
             try {
-                conn.rollback(); // Reverter em caso de erro
+                conn.rollback();
             } catch (SQLException se) {
                 Log.e("DatabaseHelper", "Erro ao reverter a transação: " + se.getMessage());
             }
@@ -262,8 +219,6 @@ public class DatabaseHelper {
         }
     }
 
-
-    // Método para atualizar o telefone do usuário na tabela users
     public static boolean atualizarTelefoneUsuario(String email, String telefone) {
         Connection conn = connect();
         if (conn == null) {
@@ -286,7 +241,53 @@ public class DatabaseHelper {
         }
     }
 
-    // Método para adicionar o usuário na tabela voluntario
+    public String[] getUserInfo(int userId) throws SQLException {
+        String[] userInfo = new String[4];
+        Connection connection = connect();
+        String query = "SELECT nome, telefone, endereco, cpf FROM users WHERE user_id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                userInfo[0] = resultSet.getString("nome");
+                userInfo[1] = resultSet.getString("telefone");
+                userInfo[2] = resultSet.getString("endereco");
+                userInfo[3] = resultSet.getString("cpf");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Erro ao buscar informações do usuário.");
+        } finally {
+            if (connection != null) {
+                connection.close(); // Fecha a conexão
+            }
+        }
+        return userInfo;
+    }
+
+    public void updateUserInfo(int userId, String nome, String telefone, String endereco, String cpf) throws SQLException {
+        Connection connection = connect(); // Estabelece conexão com o banco de dados
+        String updateQuery = "UPDATE users SET nome = ?, telefone = ?, endereco = ?, cpf = ? WHERE user_id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+            preparedStatement.setString(1, nome);
+            preparedStatement.setString(2, telefone);
+            preparedStatement.setString(3, endereco);
+            preparedStatement.setString(4, cpf);
+            preparedStatement.setInt(5, userId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Erro ao atualizar informações do usuário.");
+        } finally {
+            if (connection != null) {
+                connection.close(); // Fecha a conexão
+            }
+        }
+    }
+
     public static boolean adicionarVoluntario(String email) {
         Connection conn = connect();
         if (conn == null) {
@@ -294,18 +295,16 @@ public class DatabaseHelper {
         }
 
         try {
-            // Atualizar o nível de acesso para 2 (voluntário)
             String updateAccessQuery = "UPDATE users SET access = 2 WHERE email = ?";
             PreparedStatement stmt1 = conn.prepareStatement(updateAccessQuery);
             stmt1.setString(1, email);
             stmt1.executeUpdate();
 
-            // Adicionar na tabela voluntario (chave estrangeira para o usuário)
             String addVoluntarioQuery = "INSERT INTO voluntario (user_id) SELECT user_id FROM users WHERE email = ?";
             PreparedStatement stmt2 = conn.prepareStatement(addVoluntarioQuery);
             stmt2.setString(1, email);
             int rowsAffected = stmt2.executeUpdate();
-            return rowsAffected > 0; // Retorna true se o voluntário foi adicionado
+            return rowsAffected > 0;
         } catch (Exception e) {
             Log.e("DatabaseHelper", "Erro ao adicionar voluntário: " + e.getMessage());
             e.printStackTrace();
@@ -321,7 +320,6 @@ public class DatabaseHelper {
         return instance;
     }
 
-    // Método para redefinir a senha de um usuário
     public static boolean redefinirSenha(String email, String novaSenha) {
         Connection conn = connect();
         if (conn == null) {
@@ -334,7 +332,7 @@ public class DatabaseHelper {
             stmt.setString(1, novaSenha);
             stmt.setString(2, email);
             int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0; // Retorna true se a senha foi atualizada com sucesso
+            return rowsAffected > 0;
         } catch (Exception e) {
             Log.e("DatabaseHelper", "Erro ao redefinir senha: " + e.getMessage());
             e.printStackTrace();
@@ -344,60 +342,110 @@ public class DatabaseHelper {
         }
     }
 
-    // Método para atualizar a data de disponibilidade no banco de dados remoto
-    public boolean updateDataDisponibilidade(String userId, String dataDisponibilidade) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
+    public boolean atualizarDataDisponibilidade(int userId, String selectedDate) throws SQLException {
+        Connection conn = connect();
+        if (conn == null) {
+            return false;
+        }
+
         try {
-            conn = connect();
-            if (conn != null) {
-                String query = "UPDATE voluntario SET dataDisp = ? WHERE user_id = ?";
-                stmt = conn.prepareStatement(query);
-                stmt.setString(1, dataDisponibilidade);
-                stmt.setString(2, userId);
-                int rowsAffected = stmt.executeUpdate();
-                return rowsAffected > 0;
+            // Verificar se o voluntário já existe
+            String checkDateQuery = "SELECT * FROM voluntario WHERE user_id = ?";
+            PreparedStatement stmt1 = conn.prepareStatement(checkDateQuery);
+            stmt1.setInt(1, userId);
+            ResultSet rs = stmt1.executeQuery();
+
+            if (rs.next()) {
+                // Atualizar a data se o voluntário já existir
+                String updateDateQuery = "UPDATE voluntario SET dataDisp = ? WHERE user_id = ?";
+                PreparedStatement stmt2 = conn.prepareStatement(updateDateQuery);
+                stmt2.setString(1, selectedDate);
+                stmt2.setInt(2, userId);
+                int rowsAffected = stmt2.executeUpdate();
+
+                return rowsAffected > 0; // Retorna true se a atualização foi bem-sucedida
+            } else {
+                return false; // Voluntário não encontrado com o userId fornecido
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return false; // Erro ao processar a solicitação
         } finally {
-            if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+            closeConnection(conn);
         }
-        return false;
     }
 
-    // Método para obter o tipo de atividade para um voluntário
-    public String getTipoAtividade(String userId) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String tipoAtividade = null;
+    public Object[] carregarAtividadeVoluntario(int userId) throws SQLException {
+        Connection connection = connect();
+        String query = "SELECT tipoAtividade, dataDisp FROM voluntario WHERE user_id = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, userId);
 
-        try {
-            conn = connect();
-            if (conn != null) {
-                String query = "SELECT tipoAtividade FROM voluntario WHERE user_id = ?";
-                stmt = conn.prepareStatement(query);
-                stmt.setString(1, userId);
-                rs = stmt.executeQuery();
+        ResultSet resultSet = statement.executeQuery();
 
-                if (rs.next()) {
-                    tipoAtividade = rs.getString("tipoAtividade");
-                }
+        if (resultSet.next()) {
+            Object[] atividadeData = new Object[2];
+            atividadeData[0] = resultSet.getString("tipoAtividade");
+            atividadeData[1] = resultSet.getString("dataDisp"); // Caso queira exibir a data
+            return atividadeData;
+        } else {
+            return null;
+        }
+    }
+
+    public String getSavedDate(int userId) throws SQLException {
+        String savedDate = null;
+        Connection connection = connect(); // Método que estabelece a conexão com o banco de dados
+        String query = "SELECT dataDisp FROM voluntario WHERE user_id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                savedDate = resultSet.getString("dataDisp"); // Supondo que a coluna no banco de dados se chama 'data'
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e; // Lança a exceção para ser tratada na classe que chamar esse método
         } finally {
-            if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (connection != null) {
+                connection.close(); // Fecha a conexão
+            }
         }
 
-        return tipoAtividade;
+        return savedDate; // Retorna a data ou null se não houver
     }
 
-    // Método para fechar a conexão
+
+    public Object[] getCestaDistInfo(int userId) {
+        Connection conn = connect();
+        if (conn == null) {
+            return null;
+        }
+
+        try {
+            String query = "SELECT calendarioDist.local, calendarioDist.data " +
+                    "FROM calendarioDist " +
+                    "JOIN cesta ON calendarioDist.cesta_id = cesta.cesta_id " +
+                    "WHERE cesta.user_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Object[]{rs.getString("local"), rs.getDate("data")};
+            } else {
+                return null; // Nenhuma cesta encontrada para o usuário
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            closeConnection(conn);
+        }
+    }
+
     private static void closeConnection(Connection conn) {
         try {
             if (conn != null) {

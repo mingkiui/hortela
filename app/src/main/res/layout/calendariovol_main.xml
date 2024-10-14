@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f5f2e9"
+    android:background="#60D5B576"
     android:padding="16dp">
 
     <!-- Botão Fechar (X) -->
@@ -13,17 +13,16 @@
         android:layout_height="40dp"
         android:src="@drawable/ic_close"
         android:contentDescription="Fechar"
-        android:layout_alignParentTop="true"
+        android:padding="8dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp" />
+        android:layout_alignParentTop="true"/>
 
     <!-- Título do Calendário -->
     <TextView
         android:id="@+id/txtTituloCalendario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calendário dos voluntarios"
+        android:text="Calendário de voluntários"
         android:textSize="20sp"
         android:textColor="@color/green"
         android:fontFamily="sans-serif-medium"
@@ -45,6 +44,7 @@
 
         <!-- Exemplo de um TextView representando um dia -->
         <TextView
+            android:id="@+id/day1"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -56,6 +56,7 @@
         <!-- Adicionar outros TextViews para os dias... -->
 
         <TextView
+            android:id="@+id/day2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -64,6 +65,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day3"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -72,6 +74,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day4"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -80,6 +83,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day5"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -88,6 +92,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day6"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -96,6 +101,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day7"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -104,6 +110,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day8"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -112,6 +119,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day9"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -120,6 +128,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day10"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -128,6 +137,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day11"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -136,6 +146,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day12"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -144,6 +155,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day13"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -152,6 +164,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day14"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -160,6 +173,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day15"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -168,6 +182,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day16"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -176,6 +191,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day17"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -184,6 +200,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day18"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -192,6 +209,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day19"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -200,6 +218,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day20"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -208,6 +227,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day21"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -216,6 +236,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day22"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -224,6 +245,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day23"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -232,6 +254,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day24"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -240,6 +263,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day25"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -248,6 +272,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day26"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -256,6 +281,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day27"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -264,6 +290,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day28"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -272,6 +299,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day29"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -280,6 +308,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day30"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -288,6 +317,7 @@
             android:background="@drawable/bg_dia"
             android:textColor="@color/red" />
         <TextView
+            android:id="@+id/day31"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -300,14 +330,14 @@
 
     <!-- Botão Adicionar -->
     <Button
-        android:id="@+id/btnAdicionar"
+        android:id="@+id/btnSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adicionar"
-        android:textSize="18sp"
+        android:text="Salvar"
+        android:textSize="15sp"
         android:backgroundTint="@color/green"
         android:textColor="@android:color/white"
-        android:layout_below="@id/calendario"
+        android:layout_below="@id/txtData"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
@@ -316,13 +346,13 @@
         android:id="@+id/txtData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnAdicionar"
+        android:layout_below="@id/calendario"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:text="Selecione a data da sua disponibilidade!"
+        android:layout_marginTop="2dp"
+        android:padding="15dp"
+        android:text="     Selecione a data da sua disponibilidade apenas \n clicando no dia que você prefere do calendário acima!"
         android:textColor="@color/green"
-        android:textSize="16sp"
+        android:textSize="14sp"
         tools:ignore="TouchTargetSizeCheck" />
 
     <!-- Campo de Descrição -->
@@ -330,25 +360,47 @@
         android:id="@+id/editDescricao"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="Descrição:"
         android:textColorHint="@color/green"
         android:backgroundTint="@color/green"
         android:textColor="@color/green"
         android:padding="10dp"
         android:textSize="16sp"
         android:gravity="top"
-        android:layout_below="@id/txtData"
+        android:layout_below="@id/btnSalvar"
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
+
     <TextView
+        android:id="@+id/textDescricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editDescricao"
         android:text="Aguarde até que suas atividades sejam atribuídas"
-        android:textColor="@color/green"
+        android:textColor="@color/red"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         />
+
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDescricao"
+        android:text="Para modificar sua data de disponibilidade:"
+        android:textColor="@color/green"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        />
+    <TextView
+        android:id="@+id/textDisp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:text="@string/textDisp"
+        android:textColor="@color/green"
+        android:textSize="14sp" />
 
 </RelativeLayout>

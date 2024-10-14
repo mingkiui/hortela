@@ -2,9 +2,12 @@ package com.example.tcchortela;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -55,6 +58,7 @@ public class InscricaoVol extends AppCompatActivity {
                 boolean voluntarioAdicionado = DatabaseHelper.getInstance().adicionarVoluntario(email);
 
                 if (telefoneAtualizado && voluntarioAdicionado) {
+                    hideKeyboard(v);
                     Snackbar snackbar = Snackbar.make(v, mensagens[1], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
@@ -65,11 +69,13 @@ public class InscricaoVol extends AppCompatActivity {
                     finish();
 
                 } else if (!telefoneAtualizado) {
+                    hideKeyboard(v);
                     Snackbar snackbar = Snackbar.make(v, mensagens[3], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
                 } else {
+                    hideKeyboard(v);
                     Snackbar snackbar = Snackbar.make(v, mensagens[2], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
@@ -77,5 +83,12 @@ public class InscricaoVol extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

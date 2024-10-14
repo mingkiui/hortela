@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:padding="15dp"
         tools:context=".FaleConosco"
-        android:background="#E9E6D5">
+        android:background="#60D5B576">
 
         <ImageView
             android:id="@+id/btnClose"

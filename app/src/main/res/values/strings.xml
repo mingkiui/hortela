@@ -19,4 +19,7 @@
     <string name="erro_salvar_data">Erro ao salvar a data</string>
     <string name="atividade">Atividade: %1$s</string>
     <string name="atividade_nao_definida">Nenhuma atividade definida.</string>
+    <string name="textDisp">
+    <u>Entre em contato conosco</u>
+</string>
 </resources>

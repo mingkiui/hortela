@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E9E6D5"
+    android:background="#60D5B576"
     android:padding="15dp">
 
     <!-- Ícone principal -->
@@ -26,11 +26,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="40dp"
+        android:fontFamily="sans-serif-medium"
         android:text="Entrar como usuário"
         android:textColor="#3D5532"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif-medium"
-        />
+        android:textSize="24sp" />
 
     <!-- Campo E-mail -->
     <EditText

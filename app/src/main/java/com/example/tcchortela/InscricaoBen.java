@@ -1,9 +1,12 @@
 package com.example.tcchortela;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -67,6 +70,7 @@ public class InscricaoBen extends AppCompatActivity {
             if (DatabaseHelper.updateBeneficiaryInfo(email, nome, telefone, cpf)) {
                 // Atualiza o nível de acesso para 1
                 if (DatabaseHelper.updateAccessLevel(email, 1)) {
+                    hideKeyboard(v);
                     Snackbar snackbar = Snackbar.make(v, mensagens[1], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
@@ -76,16 +80,25 @@ public class InscricaoBen extends AppCompatActivity {
                     finish();
                 }
             } else {
+                hideKeyboard(v);
                 Snackbar snackbar = Snackbar.make(v, mensagens[2], Snackbar.LENGTH_SHORT);
                 snackbar.setBackgroundTint(Color.WHITE);
                 snackbar.setTextColor(Color.BLACK);
                 snackbar.show();
             }
         } else {
+            hideKeyboard(v);
             Snackbar snackbar = Snackbar.make(v, mensagens[3], Snackbar.LENGTH_SHORT);
             snackbar.setBackgroundTint(Color.WHITE);
             snackbar.setTextColor(Color.BLACK);
             snackbar.show();
+        }
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 }

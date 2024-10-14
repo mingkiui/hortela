@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E9E6D5"
+    android:background="#60D5B576"
     android:padding="15dp">
 
     <!-- RelativeLayout para os componentes internos -->

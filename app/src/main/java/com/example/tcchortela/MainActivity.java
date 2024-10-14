@@ -1,11 +1,13 @@
 package com.example.tcchortela;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-        IniciarComponentes();
+        iniciarComponentes();
 
         tvNoAccount.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, Cadastro.class);
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             String password = etPassword.getText().toString();
 
             if (email.isEmpty() || password.isEmpty()) {
+                hideKeyboard(v);
                 Snackbar snackbar = Snackbar.make(v, mensagens[0], Snackbar.LENGTH_SHORT);
                 snackbar.setBackgroundTint(Color.WHITE);
                 snackbar.setTextColor(Color.BLACK);
@@ -62,9 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 autenticarUsuario(v, email, password);
             }
         });
+
     }
 
-    private void IniciarComponentes() {
+    private void iniciarComponentes() {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -78,32 +82,46 @@ public class MainActivity extends AppCompatActivity {
 
         executor.execute(() -> {
             DatabaseHelper databaseHelper = new DatabaseHelper();
-            int accessLevel = databaseHelper.loginUser(email, pass);
+            Object[] loginResult = databaseHelper.loginUser(email, pass); // Modificado para retornar um array de objetos
 
             handler.post(() -> {
+                int accessLevel = (int) loginResult[1]; // Acessa o accessLevel
+                int userId = (int) loginResult[0]; // Acessa o userId
+
                 if (accessLevel == -1) {
+                    hideKeyboard(v);
                     Snackbar snackbar = Snackbar.make(v, mensagens[1], Snackbar.LENGTH_SHORT);
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
                 } else {
-                    // Sucesso no login
-                    String[] userData = databaseHelper.getUserDataByEmail(email);  // Recupera os dados do usuário
-                    String nome = userData != null ? userData[0] : "Usuário"; // Obtém o nome do array ou usa um valor padrão
+                    Object[] userData = databaseHelper.getUserDataByEmail(email);
 
-                    // Salvar o estado de login e detalhes do usuário
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("isLoggedIn", true);
-                    editor.putString("email", email);
-                    editor.putString("nome", nome);
-                    editor.putInt("accessLevel", accessLevel);
-                    editor.apply();
+                    if (userData != null && userData.length >= 3) {
+                        String nome = (String) userData[0];
+                        String userEmail = (String) userData[1];
 
-                    abrirTelaPrincipal(email, accessLevel);
+                        // Salvar o estado de login e detalhes do usuário
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.putString("email", userEmail);
+                        editor.putString("nome", nome);
+                        editor.putInt("accessLevel", accessLevel);
+                        editor.putInt("userId", userId); // Armazena o userId
+                        editor.apply();
+
+                        abrirTelaPrincipal(userEmail, accessLevel);
+                    } else {
+                        Snackbar snackbar = Snackbar.make(v, "Erro ao obter dados do usuário", Snackbar.LENGTH_SHORT);
+                        snackbar.setBackgroundTint(Color.WHITE);
+                        snackbar.setTextColor(Color.BLACK);
+                        snackbar.show();
+                    }
                 }
             });
         });
     }
+
 
     private void abrirTelaPrincipal(String email, int accessLevel) {
         Intent intent = null;
@@ -120,6 +138,13 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("email", email);  // Passa o e-mail do usuário
             startActivity(intent);
             finish();
+        }
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 }

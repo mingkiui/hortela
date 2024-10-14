@@ -1,21 +1,31 @@
 package com.example.tcchortela;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.SharedPreferences;
+
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.view.View;
+import android.content.SharedPreferences;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import java.sql.SQLException;
 
 public class InformacoesP extends AppCompatActivity {
 
-    /*/private Button editProfileButton, editSave;
+    private Button editProfileButton, editSave, editCancel;
     private EditText txtNome, txtTelefone, txtEndereco, txtCPF;
     private ImageView btnClose;
-    private boolean isEditing = false; // Variável para controlar o estado de edição
-
-    private int accessLevel; // Nível de acesso do usuário (0 = comum, 1 = beneficiário, 2 = voluntário)
+    private DatabaseHelper databaseHelper;
+    private SharedPreferences sharedPreferences;
+    private int userId;
+    private String nomeOriginal, telefoneOriginal, enderecoOriginal, cpfOriginal; // Para armazenar os valores originais
+    private String[] mensagem = {"Informações atualizadas com sucesso!", "Erro ao atualizar informações."};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,134 +35,120 @@ public class InformacoesP extends AppCompatActivity {
         // Inicialização dos componentes
         editProfileButton = findViewById(R.id.editProfileButton);
         editSave = findViewById(R.id.editSave);
+        editCancel = findViewById(R.id.editCancel);
         txtNome = findViewById(R.id.txtNome);
         txtTelefone = findViewById(R.id.txtTelefone);
         txtCPF = findViewById(R.id.txtCPF);
         txtEndereco = findViewById(R.id.txtEndereco);
         btnClose = findViewById(R.id.btnClose);
 
-        // Desabilitar os campos inicialmente
-        disableEditing();
+        // Inicializa o DatabaseHelper e SharedPreferences
+        databaseHelper = new DatabaseHelper();
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        userId = sharedPreferences.getInt("userId", -1);
 
-        // Fechar a tela ao clicar no botão de fechar
-        btnClose.setOnClickListener(v -> finish());
+        // Carrega as informações do usuário
+        carregarInformacoesDoUsuario();
 
-        // Recupera o nível de acesso do usuário
-        accessLevel = getAccessLevel();
+        // Esconde os botões de salvar e cancelar inicialmente
+        editSave.setVisibility(View.GONE);
+        editCancel.setVisibility(View.GONE);
 
-        // Carregar as informações de acordo com o nível de acesso
-        loadUserInfo(accessLevel);
-
-        // Ação do botão "Editar Perfil"
+        // Configura o botão de edição
         editProfileButton.setOnClickListener(v -> {
-            if (!isEditing) {
-                enableEditing();
-                isEditing = true;
-                Toast.makeText(InformacoesP.this, "Você pode editar as informações", Toast.LENGTH_SHORT).show();
-            }
+            habilitarEdicao(true);
+            editProfileButton.setVisibility(View.GONE); // Esconde o botão "Editar"
+            editSave.setVisibility(View.VISIBLE); // Mostra o botão "Salvar"
+            editCancel.setVisibility(View.VISIBLE); // Mostra o botão "Cancelar"
         });
 
-        // Ação do botão "Salvar"
+        // Configura o botão de salvar
         editSave.setOnClickListener(v -> {
-            if (isEditing) {
-                saveProfileData(accessLevel);
-                disableEditing();
-                isEditing = false;
-            }
+            salvarAlteracoes(v);
+            editSave.setVisibility(View.GONE); // Esconde o botão "Salvar"
+            editCancel.setVisibility(View.GONE); // Esconde o botão "Cancelar"
+            editProfileButton.setVisibility(View.VISIBLE); // Mostra o botão "Editar" novamente
         });
+
+        // Configura o botão de cancelar
+        editCancel.setOnClickListener(v -> {
+            cancelarEdicao(); // Desfaz as alterações e retorna os valores originais
+            editSave.setVisibility(View.GONE); // Esconde o botão "Salvar"
+            editCancel.setVisibility(View.GONE); // Esconde o botão "Cancelar"
+            editProfileButton.setVisibility(View.VISIBLE); // Mostra o botão "Editar" novamente
+        });
+
+        // Configura o botão de fechar
+        btnClose.setOnClickListener(v -> finish());
     }
 
-    // Método para desabilitar a edição dos campos
-    private void disableEditing() {
-        txtNome.setEnabled(false);
-        txtTelefone.setEnabled(false);
-        txtCPF.setEnabled(false);
-        txtEndereco.setEnabled(false);
-    }
+    private void carregarInformacoesDoUsuario() {
+        if (userId != -1) {
+            try {
+                String[] userInfo = databaseHelper.getUserInfo(userId);
+                nomeOriginal = userInfo[0]; // Armazena os valores originais
+                telefoneOriginal = userInfo[1];
+                enderecoOriginal = userInfo[2];
+                cpfOriginal = userInfo[3];
 
-    // Método para habilitar a edição dos campos
-    private void enableEditing() {
-        txtNome.setEnabled(true);
-        txtTelefone.setEnabled(true);
-        txtCPF.setEnabled(accessLevel == 0 || accessLevel == 2); // CPF só editável para usuários comuns ou voluntários
-        txtEndereco.setEnabled(true); // Endereço sempre pode ser editado
-    }
+                txtNome.setText(nomeOriginal);
+                txtTelefone.setText(telefoneOriginal);
+                txtEndereco.setText(enderecoOriginal);
+                txtCPF.setText(cpfOriginal);
 
-    // Método para carregar as informações do usuário de acordo com o nível de acesso
-    private void loadUserInfo(int accessLevel) {
-        String userEmail = getUserEmail();
-        DatabaseHelper db = new DatabaseHelper;
-
-        switch (accessLevel) {
-            case 1: // Beneficiário
-                Beneficiary beneficiary = db.getBeneficiaryInfo(userEmail);
-                if (beneficiary != null) {
-                    txtNome.setText(beneficiary.getNome());
-                    txtTelefone.setText(beneficiary.getTelefone());
-                    txtCPF.setText(beneficiary.getCpf()); // Não editável
-                    txtEndereco.setText(""); // Endereço será editado
-                }
-                break;
-            case 2: // Voluntário
-                Volunteer volunteer = db.getVolunteerInfo(userEmail);
-                if (volunteer != null) {
-                    txtNome.setText(volunteer.getNome());
-                    txtTelefone.setText(volunteer.getTelefone());
-                    txtCPF.setText(""); // CPF será editado
-                    txtEndereco.setText(""); // Endereço será editado
-                }
-                break;
-            case 0: // Usuário comum
-            default:
-                txtNome.setText(""); // Todos os campos estão vazios
-                txtTelefone.setText("");
-                txtCPF.setText("");
-                txtEndereco.setText("");
-                break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    // Método para salvar os dados do perfil no banco de dados
-    private void saveProfileData(int accessLevel) {
-        String nome = txtNome.getText().toString();
-        String telefone = txtTelefone.getText().toString();
-        String cpf = txtCPF.getText().toString();
-        String endereco = txtEndereco.getText().toString();
-        String userEmail = getUserEmail();
+    private void habilitarEdicao(boolean habilitar) {
+        txtNome.setEnabled(habilitar);
+        txtTelefone.setEnabled(habilitar);
+        txtEndereco.setEnabled(habilitar);
+        txtCPF.setEnabled(habilitar);
+        editSave.setEnabled(habilitar);
+        editCancel.setEnabled(habilitar);
+    }
 
-        // Aqui você chamaria o método do DatabaseHelper para salvar os dados no banco
-        DatabaseHelper db = new DatabaseHelper;
-        boolean isSaved = false;
+    private void salvarAlteracoes(View v) {
+        Log.d("InformacoesP", "Entrou no método salvarAlteracoes()");
 
-        switch (accessLevel) {
-            case 1: // Beneficiário
-                isSaved = db.updateBeneficiaryDetails(userEmail, nome, cpf, telefone, endereco);
-                break;
-            case 2: // Voluntário
-                isSaved = db.updateBeneficiaryDetails(userEmail, nome, telefone, cpf, endereco);
-                break;
-            case 0: // Usuário comum
-            default:
-                isSaved = db.updateBeneficiaryDetails(userEmail, nome, telefone, cpf, endereco);
-                break;
-        }
+        if (userId != -1) {
+            String nome = txtNome.getText().toString();
+            String telefone = txtTelefone.getText().toString();
+            String endereco = txtEndereco.getText().toString();
+            String cpf = txtCPF.getText().toString();
 
-        if (isSaved) {
-            Toast.makeText(this, "Informações salvas com sucesso!", Toast.LENGTH_SHORT).show();
+            Log.d("InformacoesP", "Valores obtidos: Nome: " + nome + ", Telefone: " + telefone + ", Endereço: " + endereco + ", CPF: " + cpf);
+
+            try {
+                databaseHelper.updateUserInfo(userId, nome, telefone, endereco, cpf);
+                Log.d("InformacoesP", "Dados atualizados com sucesso no banco de dados");
+                Snackbar snackbar = Snackbar.make(v, mensagem[0], Snackbar.LENGTH_SHORT);
+                snackbar.setBackgroundTint(Color.WHITE);
+                snackbar.setTextColor(Color.BLACK);
+                snackbar.show();
+                habilitarEdicao(false); // Desabilita edição após salvar
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Log.e("InformacoesP", "Erro ao atualizar informações: " + e.getMessage());
+                Snackbar snackbar = Snackbar.make(v, mensagem[1], Snackbar.LENGTH_SHORT);
+                snackbar.setBackgroundTint(Color.WHITE);
+                snackbar.setTextColor(Color.BLACK);
+                snackbar.show();
+            }
         } else {
-            Toast.makeText(this, "Erro ao salvar as informações.", Toast.LENGTH_SHORT).show();
+            Log.e("InformacoesP", "userId não é válido!");
         }
     }
 
-    // Método para pegar o e-mail do usuário logado usando SharedPreferences
-    private String getUserEmail() {
-        SharedPreferences sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
-        return sharedPreferences.getString("email", ""); // Retorna o email salvo ou uma string vazia
+    private void cancelarEdicao() {
+        // Restaura os valores originais
+        txtNome.setText(nomeOriginal);
+        txtTelefone.setText(telefoneOriginal);
+        txtEndereco.setText(enderecoOriginal);
+        txtCPF.setText(cpfOriginal);
+        habilitarEdicao(false); // Desabilita a edição
     }
-
-    // Método para pegar o nível de acesso do usuário logado usando SharedPreferences
-    private int getAccessLevel() {
-        SharedPreferences sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
-        return sharedPreferences.getInt("accessLevel", 0); // Retorna o nível de acesso ou 0 (usuário comum)
-    }/*/
 }

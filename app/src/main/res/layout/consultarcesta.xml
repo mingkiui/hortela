@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EAE8D3"
+        android:padding="16dp">
+
+        <!-- Botão de Fechar -->
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_close"
+            android:contentDescription="Fechar"
+            android:padding="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Ícone da Caixa -->
+        <ImageView
+            android:id="@+id/box_icon"
+            android:layout_width="247dp"
+            android:layout_height="143dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/btnClose"
+            android:layout_marginTop="150dp"
+            android:contentDescription="Ícone de caixa"
+            android:src="@drawable/ic_box" />
+
+        <!-- Data e Hora -->
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="#3A5436"
+            android:gravity="center"
+            android:layout_below="@id/box_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/text_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pegar das 07h às 16h"
+            android:textSize="24sp"
+            android:textColor="#3A5436"
+            android:gravity="center"
+            android:layout_below="@id/text_date"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="1dp"/>
+
+        <!-- Endereço e Nome do Carente -->
+        <TextView
+            android:id="@+id/text_address_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#3A5436"
+            android:gravity="center"
+            android:layout_below="@id/text_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

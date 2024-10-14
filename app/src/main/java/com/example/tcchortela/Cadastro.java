@@ -1,9 +1,11 @@
 package com.example.tcchortela;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -31,11 +33,13 @@ public class Cadastro extends AppCompatActivity {
             String confirmSenha = etConfirmPass1.getText().toString();
 
             if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmSenha.isEmpty()) {
+                hideKeyboard(v);
                 Snackbar snackbar = Snackbar.make(v, mensagens[0], Snackbar.LENGTH_SHORT);
                 snackbar.setBackgroundTint(Color.WHITE);
                 snackbar.setTextColor(Color.BLACK);
                 snackbar.show();
             } else if (!senha.equals(confirmSenha)) {
+                hideKeyboard(v);
                 Snackbar snackbar = Snackbar.make(v, "As senhas não coincidem", Snackbar.LENGTH_SHORT);
                 snackbar.setBackgroundTint(Color.WHITE);
                 snackbar.setTextColor(Color.BLACK);
@@ -45,7 +49,6 @@ public class Cadastro extends AppCompatActivity {
             }
         });
 
-        // Botão para fechar a tela e voltar para o login
         btnClose.setOnClickListener(v -> {
             Intent intent = new Intent(Cadastro.this, MainActivity.class);
             startActivity(intent);
@@ -57,13 +60,14 @@ public class Cadastro extends AppCompatActivity {
         boolean sucesso = DatabaseHelper.registerUser(nome, email, senha);
 
         if (sucesso) {
+            hideKeyboard(v);
             Snackbar snackbar = Snackbar.make(v, mensagens[1], Snackbar.LENGTH_SHORT);
             snackbar.setBackgroundTint(Color.WHITE);
             snackbar.setTextColor(Color.BLACK);
             snackbar.show();
 
-            // Não fazer a navegação automática para a tela de login.
         } else {
+            hideKeyboard(v);
             Snackbar snackbar = Snackbar.make(v, mensagens[2], Snackbar.LENGTH_SHORT);
             snackbar.setBackgroundTint(Color.WHITE);
             snackbar.setTextColor(Color.BLACK);
@@ -78,6 +82,13 @@ public class Cadastro extends AppCompatActivity {
         etConfirmPass1 = findViewById(R.id.etConfirmPass1);
         btnRegister = findViewById(R.id.btnRegister);
         btnClose = findViewById(R.id.btnClose);
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
 
